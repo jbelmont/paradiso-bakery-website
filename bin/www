@@ -12,17 +12,18 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
-
-/**
- * Set IP address
- */
-var IP_ADDRESS = '104.131.117.137';
 
 /**
  * Create HTTP server.
  */
+
+/**
+ * Set IP address
+ */
+
+var IP_ADDRESS = '104.131.117.137';
 
 var server = http.createServer(app);
 
