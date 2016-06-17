@@ -6,9 +6,9 @@ var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
 var concat = require('gulp-concat');
-var plumber = require('gulp-plumber');
-var merge = require('merge-stream');
 var nodemon = require('gulp-nodemon');
+var del = require('del');
+var gutil = require('gulp-util');
 
 var webpackConfig = require('./webpack.config.js');
 
