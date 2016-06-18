@@ -5,10 +5,8 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var runSequence = require('run-sequence');
-var concat = require('gulp-concat');
-var nodemon = require('gulp-nodemon');
-var del = require('del');
 var gutil = require('gulp-util');
+var nodemon = require('gulp-nodemon');
 
 var webpackConfig = require('./webpack.config.js');
 
@@ -19,12 +17,6 @@ var sassPaths = [
   'static/sass/*.scss'
 ];
 
-gulp.task('clean', function() {
-  return del([
-    './static/build/*'
-  ]);
-});
-
 gulp.task('uglify:js', function() {
   return gulp.src(jsPaths)
     .pipe(uglify())
@@ -32,7 +24,6 @@ gulp.task('uglify:js', function() {
 });
 
 gulp.task('build:js', function(callback) {
-  process.env.UV_THREADPOOL_SIZE = 100;
   webpack(Object.create(webpackConfig), function(err, stats) {
     if (err) {
       throw new gutil.PluginError('build:js', err);
@@ -55,7 +46,6 @@ gulp.task('build:sass', function() {
 });
 
 gulp.task('watch:js', function() {
-  process.env.UV_THREADPOOL_SIZE = 100;
   var config = Object.create(webpackConfig);
   config.watch = true;
   webpack(config, function(err, stats) {
@@ -74,16 +64,15 @@ gulp.task('watch:sass', function() {
 gulp.task('start', function() {
   nodemon({
     script: './bin/www',
-    ignore: ['static/*']
+    ignore: ['static/*'],
+    env: { 'PORT': '4040' }
   });
 });
 
 gulp.task('build', function(cb) {
-  process.env.UV_THREADPOOL_SIZE = 100;
-  runSequence('clean', 'uglify:js', 'build:js', 'build:sass', cb);
+  runSequence('uglify:js', 'build:js', 'build:sass', cb);
 });
 
 gulp.task('dev', function(cb) {
-  process.env.UV_THREADPOOL_SIZE = 100;
-  runSequence('clean', 'uglify:js', 'build:sass', ['watch:js', 'watch:sass'], 'start', cb);
+  runSequence('uglify:js', 'build:sass', ['watch:js', 'watch:sass'], 'start', cb);
 });
