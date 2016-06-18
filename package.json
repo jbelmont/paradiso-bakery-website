@@ -8,8 +8,7 @@
     "lint": "esw static/js",
     "prestart:dev": "npm run clean:build && npm run lint",
     "start:dev": "gulp dev",
-    "prestart": "npm run clean:build && gulp build",
-    "start": " node ./bin/www"
+    "build": "npm run clean:build && gulp build"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
