@@ -4,6 +4,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var nodemon = require('gulp-nodemon');
@@ -14,7 +15,8 @@ var jsPaths = [
   'static/js/*.js'
 ];
 var sassPaths = [
-  'static/scss/*.scss'
+  'static/scss/*.scss',
+  './node_modules/bootstrap/dist/css/*.css'
 ];
 
 gulp.task('uglify:js', function() {
@@ -34,13 +36,26 @@ gulp.task('build:js', function(callback) {
 });
 
 gulp.task('build:sass', function() {
-  return gulp.src(sassPaths)
+  return gulp.src(sassPaths[0])
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed',
       includePaths: ['node_modules']
     }))
     .pipe(autoprefixer({cascade: false}))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./static/build'));
+});
+
+gulp.task('build:vendor:sass', function() {
+  return gulp.src(sassPaths[1])
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      outputStyle: 'compressed',
+      includePaths: ['node_modules']
+    }))
+    .pipe(autoprefixer({cascade: false}))
+    .pipe(concat('bootstrap.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./static/build'));
 });
@@ -70,9 +85,9 @@ gulp.task('start', function() {
 });
 
 gulp.task('build', function(cb) {
-  runSequence('uglify:js', 'build:js', 'build:sass', cb);
+  runSequence('uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
 });
 
 gulp.task('dev', function(cb) {
-  runSequence('uglify:js', 'build:sass', ['watch:js', 'watch:sass'], 'start', cb);
+  runSequence('uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
 });
