@@ -14,7 +14,7 @@ var jsPaths = [
   'static/js/*.js'
 ];
 var sassPaths = [
-  'static/sass/*.scss'
+  'static/scss/*.scss'
 ];
 
 gulp.task('uglify:js', function() {
