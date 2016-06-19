@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
+var merge = require('merge-stream');
 var nodemon = require('gulp-nodemon');
 
 var webpackConfig = require('./webpack.config.js');
@@ -18,6 +19,23 @@ var sassPaths = [
   'static/scss/*.scss',
   './node_modules/bootstrap/dist/css/*.css'
 ];
+
+var filesToCopy = [{
+		src: './node_modules/react/dist/react.min.js',
+		dest: './static/build/react.min.js'
+	}, {
+    src: './node_modules/react-dom/dist/react-dom.min.js',
+		dest: './static/build/react-dom.min.js'
+  }
+];
+
+gulp.task('copy:react:files', function() {
+	var streams = [];
+	filesToCopy.forEach(function(file) {
+		streams.push(gulp.src(file.src).pipe(gulp.dest(file.dest)));
+	});
+	return merge.apply(this, streams);
+});
 
 gulp.task('uglify:js', function() {
   return gulp.src(jsPaths)
@@ -85,9 +103,9 @@ gulp.task('start', function() {
 });
 
 gulp.task('build', function(cb) {
-  runSequence('uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
+  runSequence('copy:react:files', 'uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
 });
 
 gulp.task('dev', function(cb) {
-  runSequence('uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
+  runSequence('copy:react:files', 'uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
 });
