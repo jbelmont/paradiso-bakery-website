@@ -22,10 +22,10 @@ var sassPaths = [
 
 var filesToCopy = [{
 		src: './node_modules/react/dist/react.min.js',
-		dest: './static/build/react.min.js'
+		dest: './static/build'
 	}, {
     src: './node_modules/react-dom/dist/react-dom.min.js',
-		dest: './static/build/react-dom.min.js'
+		dest: './static/build'
   }
 ];
 
