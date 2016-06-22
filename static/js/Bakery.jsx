@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 
-import BakeryHeader from 'BakeryHeader.jsx';
-import BakeryBody from 'BakeryBody.jsx';
-import BakeryFooter from 'BakeryFooter.jsx';
+import BakeryHeader from './BakeryHeader.jsx';
+import BakeryBody from './BakeryBody.jsx';
+import BakeryFooter from './BakeryFooter.jsx';
 
 
 class Bakery extends Component {
 
   render() {
-    return !this.props.error ? (
-      <div>
-        <BakeryHeader />
-        <BakeryBody />
-        <BakeryFooter />
+    return (
+      <div className="bakery__container-block">
+        <span>Text Here</span>
       </div>
-    ) : this.props.children;
+    );
   }
 
 }

@@ -14,7 +14,10 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loader: 'babel'
+      loader: 'babel',
+      query: {
+        presets:['es2015','react']
+      }
     },{
       test: /\.scss$/,
       loader: 'style!css!autoprefixer!sass?sourceMap'
