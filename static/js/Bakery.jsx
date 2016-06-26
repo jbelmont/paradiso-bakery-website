@@ -7,11 +7,15 @@ import BakeryFooter from './BakeryFooter.jsx';
 
 
 class Bakery extends Component {
-
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div className="bakery__container-block">
-        <span>Text Here</span>
+        <BakeryHeader />
+        <BakeryBody />
+        <BakeryFooter />
       </div>
     );
   }
@@ -20,5 +24,5 @@ class Bakery extends Component {
 
 ReactDOM.render(
   <Bakery />,
-  document.getElementById('bakery__container')
+  document.getElementById('bakeryContainer')
 );

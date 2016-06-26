@@ -17,7 +17,8 @@ var jsPaths = [
 ];
 var sassPaths = [
   'static/scss/*.scss',
-  './node_modules/bootstrap/dist/css/*.css'
+  './node_modules/bootstrap/dist/css/*.css',
+  './node_modules/normalize.css/normalize.css'
 ];
 
 var filesToCopy = [{
@@ -61,6 +62,7 @@ gulp.task('build:sass', function() {
       includePaths: ['node_modules']
     }))
     .pipe(autoprefixer({cascade: false}))
+    .pipe(concat('bakery.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./static/build'));
 });
@@ -73,7 +75,7 @@ gulp.task('build:vendor:sass', function() {
       includePaths: ['node_modules']
     }))
     .pipe(autoprefixer({cascade: false}))
-    .pipe(concat('bootstrap.css'))
+    .pipe(concat('vendor.css'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./static/build'));
 });
