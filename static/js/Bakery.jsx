@@ -9,11 +9,14 @@ import BakeryFooter from './BakeryFooter.jsx';
 class Bakery extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      headerSelected: true
+    };
   }
   render() {
     return (
       <div className="bakery__container-block">
-        <BakeryHeader />
+        <BakeryHeader headerSelected={this.state.headerSelected} />
         <BakeryBody />
         <BakeryFooter />
       </div>
