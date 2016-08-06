@@ -9,6 +9,7 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var merge = require('merge-stream');
 var nodemon = require('gulp-nodemon');
+var livereload = require('gulp-livereload');
 
 var webpackConfig = require('./webpack.config.js');
 
@@ -63,7 +64,8 @@ gulp.task('build:sass', function() {
     .pipe(autoprefixer({cascade: false}))
     .pipe(concat('bakery.css'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./static/build'));
+    .pipe(gulp.dest('./static/build'))
+    .pipe(livereload());
 });
 
 gulp.task('build:vendor:sass', function() {
@@ -88,11 +90,11 @@ gulp.task('watch:js', function() {
     }
     gutil.log('[watch:js]', stats.toString({colors: true, chunks: false}));
   });
-  gulp.watch('static/js/*.js', ['uglify:js']);
+  gulp.watch('static/js/*.js', ['uglify:js', 'build:js']);
 });
 
 gulp.task('watch:sass', function() {
-  gulp.watch(['./static/scss/*.scss']);
+  gulp.watch('./static/scss/*.scss', ['build:sass']);
 });
 
 gulp.task('start', function() {
@@ -108,5 +110,6 @@ gulp.task('build', function(cb) {
 });
 
 gulp.task('dev', function(cb) {
+  livereload.listen();
   runSequence('copy:react:files', 'uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
 });
