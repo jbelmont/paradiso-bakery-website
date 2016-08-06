@@ -17,7 +17,6 @@ var jsPaths = [
 ];
 var sassPaths = [
   'static/scss/*.scss',
-  './node_modules/bootstrap/dist/css/*.css',
   './node_modules/normalize.css/normalize.css'
 ];
 
@@ -100,7 +99,7 @@ gulp.task('start', function() {
   nodemon({
     script: './bin/www',
     ignore: ['static/*'],
-    env: { 'PORT': '4040' }
+    env: { 'PORT': '3000' }
   });
 });
 
