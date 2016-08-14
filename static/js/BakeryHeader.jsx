@@ -5,14 +5,16 @@ export default class BakeryHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      headerSelected: this.props.headerSelected
+      headerSelected: this.props.headerSelected,
+      linkName: ''
     };
     this._selectNav = this._selectNav.bind(this);
   }
 
-  _selectNav() {
+  _selectNav(event) {
+    const linkName = event.target.textContent.split(" ")[0].toLowerCase();
     this.setState({
-      headerSelected: !this.state.headerSelected
+      linkName: linkName
     });
   }
 
@@ -26,21 +28,33 @@ export default class BakeryHeader extends Component {
         <nav className="bakery__header-container-tabs-nav">
           <ul className="bakery__header-container-tabs-list">
             <li role="presentation"
-            className={`bakery__tabs ${this.state.headerSelected && 'selected' || ''}`}
-            onClick={this._selectNav}>
-            <a href="#">Home</a></li>
+                data-link-name={this.state.linkName === 'home' ? 'home' : ''}
+                className={this.state.linkName === 'home' ? 'bakery__tabs selected' : 'bakery__tabs'}
+                onClick={this._selectNav}>
+              <a className='bakery__navigation--links'
+                href="#">Home</a>
+            </li>
             <li role="presentation"
-            className={`bakery__tabs ${this.state.headerSelected && 'selected' || ''}`}
-            onClick={this._selectNav}>
-            <a href="#">Breads & Pastries</a></li>
+                data-link-name={this.state.linkName === 'breads' ? 'breads' : ''}
+                className={this.state.linkName === 'breads' ? 'bakery__tabs selected' : 'bakery__tabs'}
+                onClick={this._selectNav}>
+              <a className='bakery__navigation--links'
+                href="#">Breads & Pastries</a>
+            </li>
             <li role="presentation"
-            className={`bakery__tabs ${this.state.headerSelected && 'selected' || ''}`}
-            onClick={this._selectNav}>
-            <a href="#">Contact</a></li>
+                data-link-name={this.state.linkName === 'contact' ? 'contact' : ''}
+                className={this.state.linkName === 'contact' ? 'bakery__tabs selected' : 'bakery__tabs'}
+                onClick={this._selectNav}>
+              <a className='bakery__navigation--links'
+                href="#">Contact</a>
+            </li>
             <li role="presentation"
-            className={`bakery__tabs ${this.state.headerSelected && 'selected' || ''}`}
-            onClick={this._selectNav}>
-            <a href="#">Orders</a></li>
+                data-link-name={this.state.linkName === 'orders' ? 'orders' : ''}
+                className={this.state.linkName === 'orders' ? 'bakery__tabs selected' : 'bakery__tabs'}
+                onClick={this._selectNav}>
+              <a className='bakery__navigation--links'
+                href="#">Orders</a>
+            </li>
           </ul>
         </nav>
       </div>
