@@ -33,6 +33,7 @@ export default class BakeryHeader extends Component {
                 onClick={this._selectNav}>
               <a className='bakery__navigation--links'
                 href="#">Home</a>
+              <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'breads' ? 'breads' : ''}
@@ -40,6 +41,7 @@ export default class BakeryHeader extends Component {
                 onClick={this._selectNav}>
               <a className='bakery__navigation--links'
                 href="#">Breads & Pastries</a>
+              <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'contact' ? 'contact' : ''}
@@ -47,6 +49,7 @@ export default class BakeryHeader extends Component {
                 onClick={this._selectNav}>
               <a className='bakery__navigation--links'
                 href="#">Contact</a>
+              <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'orders' ? 'orders' : ''}
@@ -54,6 +57,7 @@ export default class BakeryHeader extends Component {
                 onClick={this._selectNav}>
               <a className='bakery__navigation--links'
                 href="#">Orders</a>
+              <div className="bakery__navigation--bottom-border"></div>
             </li>
           </ul>
         </nav>

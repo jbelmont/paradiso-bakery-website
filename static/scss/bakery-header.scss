@@ -51,6 +51,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   > a {
     text-decoration: none;
@@ -66,9 +67,12 @@
   }
 }
 
-[data-link-name="home"],
-[data-link-name="breads"],
-[data-link-name="contact"],
-[data-link-name="orders"] {
+[data-link-name="home"] > .bakery__navigation--bottom-border,
+[data-link-name="breads"] > .bakery__navigation--bottom-border,
+[data-link-name="contact"] > .bakery__navigation--bottom-border,
+[data-link-name="orders"] > .bakery__navigation--bottom-border {
   border-bottom: 3px solid $header__anchor-hover-color;
+  width: 50%;
+  position: relative;
+  top: 28.75%;
 }
