@@ -21,12 +21,18 @@ var sassPaths = [
   './node_modules/normalize.css/normalize.css'
 ];
 
-var filesToCopy = [{
+var filesToCopy = [
+  {
 		src: './node_modules/react/dist/react.min.js',
 		dest: './static/build'
-	}, {
+	},
+  {
     src: './node_modules/react-dom/dist/react-dom.min.js',
 		dest: './static/build'
+  },
+  {
+    src: './static/images/paradiso.jpg',
+    dest: './static/build'
   }
 ];
 

@@ -36,11 +36,11 @@ export default class BakeryHeader extends Component {
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
-                data-link-name={this.state.linkName === 'breads' ? 'breads' : ''}
-                className={this.state.linkName === 'breads' ? 'bakery__tabs selected' : 'bakery__tabs'}
+                data-link-name={this.state.linkName === 'menu' ? 'menu' : ''}
+                className={this.state.linkName === 'menu' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
               <a className='bakery__navigation--links'
-                href="#">Breads & Pastries</a>
+                href="#">Menu</a>
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"

@@ -4,14 +4,16 @@ export default class BakeryBody extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      imagesPath: './build/paradiso.jpg'
+    }
   }
   render() {
     return (
       <div className="bakery__body-container">
-        <div className="bakery__body-container-items">
-          <div className="bakery__body-container-items-text"></div>
+        <div className="bakery__body-container-main-image">
+          <img src={this.state.imagesPath} alt="Paradiso Pastry Chef" />
         </div>
-        <div className="bakery__body-container-pastries"></div>
       </div>
     );
   }

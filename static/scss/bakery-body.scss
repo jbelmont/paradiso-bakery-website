@@ -1,7 +1,15 @@
 .bakery__body-container {
   display: flex;
 
-  &-items {
+  &-main-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
 
+    > img {
+      width: 750px;
+      height: 680px;
+    }
   }
 }
