@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class BakeryBody extends Component {
+class BakeryHome extends Component {
 
   constructor(props) {
     super(props);
@@ -19,3 +19,5 @@ export default class BakeryBody extends Component {
   }
 
 }
+
+export default BakeryHome;

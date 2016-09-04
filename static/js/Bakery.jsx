@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
 
 import BakeryHeader from './BakeryHeader.jsx';
-import BakeryBody from './BakeryBody.jsx';
+import BakeryHome from './BakeryHome.jsx';
+import Menu from './Menu.jsx';
+import Contact from './Contact.jsx';
+import Orders from './Orders.jsx';
 import BakeryFooter from './BakeryFooter.jsx';
 
 class Bakery extends Component {
@@ -16,14 +19,14 @@ class Bakery extends Component {
     return (
       <Router history={hashHistory}>
         <Route path="/" component={BakeryHeader}>
-          <IndexRoute component={BakeryBody}></IndexRoute>
-          <Route path="/menu" component={BakeryBody}></Route>
-          <Route path="/contact" component={BakeryBody}></Route>
-          <Route path="/orders" component={BakeryBody}></Route>
+          <IndexRoute component={BakeryHome}></IndexRoute>
+          <Route path="/menu" component={Menu}></Route>
+          <Route path="/contact" component={Contact}></Route>
+          <Route path="/orders" component={Orders}></Route>
         </Route>
       </Router>
     );
   }
 }
 
-export default Bakery
+export default Bakery;

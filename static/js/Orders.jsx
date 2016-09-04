@@ -7,7 +7,9 @@ class Orders extends Component {
   }
   render() {
     return (
-      <div className="orders__container"></div>
+      <div className="orders__container">
+      I am orders.
+      </div>
     );
   }
 

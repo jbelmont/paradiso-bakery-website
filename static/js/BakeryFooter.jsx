@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class BakeryFooter extends Component {
+class BakeryFooter extends Component {
 
   render() {
     return (
@@ -11,3 +11,5 @@ export default class BakeryFooter extends Component {
   }
 
 }
+
+export default BakeryFooter;

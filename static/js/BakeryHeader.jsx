@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-export default class BakeryHeader extends Component {
+
+class BakeryHeader extends Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +33,7 @@ export default class BakeryHeader extends Component {
                 data-link-name={this.state.linkName === 'home' ? 'home' : ''}
                 className={this.state.linkName === 'home' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <Link className='bakery__navigation--links' to="/menu">Home</Link>{this.props.children}
+              <Link className='bakery__navigation--links' to="/">Home</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
@@ -46,14 +47,14 @@ export default class BakeryHeader extends Component {
                 data-link-name={this.state.linkName === 'contact' ? 'contact' : ''}
                 className={this.state.linkName === 'contact' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <Link className='bakery__navigation--links' to="/menu">Contact</Link>{this.props.children}
+              <Link className='bakery__navigation--links' to="/contact">Contact</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'orders' ? 'orders' : ''}
                 className={this.state.linkName === 'orders' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <Link className='bakery__navigation--links' to="/menu">Orders</Link>{this.props.children}
+              <Link className='bakery__navigation--links' to="/orders">Orders</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
           </ul>
@@ -63,3 +64,5 @@ export default class BakeryHeader extends Component {
     );
   }
 }
+
+export default BakeryHeader;
