@@ -6,7 +6,7 @@
     "clean:build": "rimraf ./static/build",
     "lint:watch": "npm run lint -- --watch",
     "lint": "esw static/js",
-    "prestart:dev": "npm run clean:build && npm run lint",
+    "prestart:dev": "npm run clean:build",
     "start:dev": "gulp dev",
     "build": "npm run clean:build && gulp build"
   },

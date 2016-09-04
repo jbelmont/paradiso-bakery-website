@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 export default class BakeryHeader extends Component {
 
@@ -31,32 +32,28 @@ export default class BakeryHeader extends Component {
                 data-link-name={this.state.linkName === 'home' ? 'home' : ''}
                 className={this.state.linkName === 'home' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <a className='bakery__navigation--links'
-                href="#">Home</a>
+              <Link className='bakery__navigation--links' to="/menu">Home</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'menu' ? 'menu' : ''}
                 className={this.state.linkName === 'menu' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <a className='bakery__navigation--links'
-                href="#">Menu</a>
+                <Link className='bakery__navigation--links' to="/menu">Menu</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'contact' ? 'contact' : ''}
                 className={this.state.linkName === 'contact' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <a className='bakery__navigation--links'
-                href="#">Contact</a>
+              <Link className='bakery__navigation--links' to="/menu">Contact</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
             <li role="presentation"
                 data-link-name={this.state.linkName === 'orders' ? 'orders' : ''}
                 className={this.state.linkName === 'orders' ? 'bakery__tabs selected' : 'bakery__tabs'}
                 onClick={this._selectNav}>
-              <a className='bakery__navigation--links'
-                href="#">Orders</a>
+              <Link className='bakery__navigation--links' to="/menu">Orders</Link>{this.props.children}
               <div className="bakery__navigation--bottom-border"></div>
             </li>
           </ul>

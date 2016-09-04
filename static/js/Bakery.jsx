@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
 
 import BakeryHeader from './BakeryHeader.jsx';
 import BakeryBody from './BakeryBody.jsx';
 import BakeryFooter from './BakeryFooter.jsx';
-
 
 class Bakery extends Component {
   constructor(props) {
@@ -15,17 +14,16 @@ class Bakery extends Component {
   }
   render() {
     return (
-      <div className="bakery__container-block">
-        <BakeryHeader headerSelected={this.state.headerSelected} />
-        <BakeryBody />
-        <BakeryFooter />
-      </div>
+      <Router history={hashHistory}>
+        <Route path="/" component={BakeryHeader}>
+          <IndexRoute component={BakeryBody}></IndexRoute>
+          <Route path="/menu" component={BakeryBody}></Route>
+          <Route path="/contact" component={BakeryBody}></Route>
+          <Route path="/orders" component={BakeryBody}></Route>
+        </Route>
+      </Router>
     );
   }
-
 }
 
-ReactDOM.render(
-  <Bakery />,
-  document.getElementById('bakeryContainer')
-);
+export default Bakery

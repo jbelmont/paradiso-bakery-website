@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    Bakery: './static/js/Bakery.jsx'
+    App: './static/js/App.jsx'
   },
   output: {
     path: __dirname + '/static/build',
