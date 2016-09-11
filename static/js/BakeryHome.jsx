@@ -8,6 +8,7 @@ class BakeryHome extends Component {
       imagesPath: './build/paradiso.jpg'
     }
   }
+
   render() {
     return (
       <div className="bakery__body-container">
@@ -17,7 +18,6 @@ class BakeryHome extends Component {
       </div>
     );
   }
-
 }
 
 export default BakeryHome;

@@ -1,30 +1,43 @@
 import React, { Component } from 'react';
-import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
-
-import BakeryHeader from './BakeryHeader.jsx';
-import BakeryHome from './BakeryHome.jsx';
-import Menu from './Menu.jsx';
-import Contact from './Contact.jsx';
-import Orders from './Orders.jsx';
-import BakeryFooter from './BakeryFooter.jsx';
+import { Link, IndexLink } from 'react-router';
 
 class Bakery extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      headerSelected: true
+      onlyActiveOnIndex: true
     };
   }
+
   render() {
     return (
-      <Router history={hashHistory}>
-        <Route path="/" component={BakeryHeader}>
-          <IndexRoute component={BakeryHome}></IndexRoute>
-          <Route path="/menu" component={Menu}></Route>
-          <Route path="/contact" component={Contact}></Route>
-          <Route path="/orders" component={Orders}></Route>
-        </Route>
-      </Router>
+      <div className="bakery__container">
+        <header className="bakery__header-container">
+        <div className="bakery__header-container-label">
+          <p>Jean Pauls Paradiso</p>
+        </div>
+        <div className="bakery__header-container-tabs">
+          <nav className="bakery__header-container-tabs-nav">
+            <ul className="bakery__header-container-tabs-list">
+              <IndexLink className='bakery__tabs'
+                activeClassName="bakery__navigation--bottom-border"
+                to="/">Home</IndexLink>
+              <Link className='bakery__tabs'
+                activeClassName="bakery__navigation--bottom-border"
+                to="/menu">Menu</Link>
+              <Link className='bakery__tabs'
+                activeClassName="bakery__navigation--bottom-border"
+                to="/contact">Contact</Link>
+              <Link className='bakery__tabs'
+                activeClassName="bakery__navigation--bottom-border"
+                to="/orders">Orders</Link>
+            </ul>
+          </nav>
+        </div>
+        </header>
+        {this.props.children}
+      </div>
     );
   }
 }
