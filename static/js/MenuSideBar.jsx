@@ -15,9 +15,10 @@ class MenuSideBar extends Component {
     const {menuitems} = this.state;
     const menuitemlist = menuitems.map( (item) => <MenuSideBarButton menuitem={item} />);
     return (
-      <sidebar className="menu_sidebar__container">
+      <aside className="menu_sidebar__container">
         {menuitemlist}
-      </sidebar>
+        <div className="bottom-sidebar-space"></div>
+      </aside>
     );
   }
 
