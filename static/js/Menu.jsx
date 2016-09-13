@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import MenuSideBar from './MenuSideBar.jsx';
+import MenuItems from './MenuItems.jsx';
+
 class Menu extends Component {
 
   constructor(props) {
@@ -8,7 +11,8 @@ class Menu extends Component {
   render() {
     return (
       <div className="menu__container">
-        Menu Stuff.
+        <MenuSideBar />
+        <MenuItems />
       </div>
     );
   }
