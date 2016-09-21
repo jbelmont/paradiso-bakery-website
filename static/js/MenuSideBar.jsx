@@ -7,13 +7,13 @@ class MenuSideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuitems: ['Breakfast', 'Boxed Lunches', 'Entree Salads', 'Gourmet Trays and Appetizers', 'Main Selections', 'Pizzas']
+      menuitems: ['Breakfast', 'Breakfast Ala Carte','Boxed Lunches', 'Entree Salads', 'Gourmet Trays and Appetizers', 'Main Selections', 'Pizzas']
     };
   }
 
   render() {
     const {menuitems} = this.state;
-    const menuitemlist = menuitems.map( (item) => <MenuSideBarButton menuitem={item} />);
+    const menuitemlist = menuitems.map( (item) => <MenuSideBarButton itemArea={this.props.itemArea} menuitem={item} />);
     return (
       <aside className="menu_sidebar__container">
         {menuitemlist}
