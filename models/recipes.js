@@ -7,26 +7,22 @@ const recipes = [
         {omelet: 'Omelet Any Way'},
         {eggs: 'Eggs Any Way'},
         {hardBoiledEggs: 'Hardboiled Eggs'},
-        {
-            bacon: [
-                { cherry: 'Cherry Smoked Bacon'}, 
-                { apple: 'Apple Hickory Bacon'}
-            ]
-        },
         {goetta: 'Goetta'},
         {hamSteak: 'Sky Heaven Ham Steak'},
         {turkeySausage: 'Turkey Sausage'},
         {noMeatBacon: 'Meatless Bacon and Sausage'},
-        {
-            drinks: [
-                {orangeJuice: '16 oz Orange Juice, Fresh Squeezed'},
-                {grapeFruitJuice: '16 oz GrapeFruit Juice, Fresh Squeezed'},
-                {cranberryJuice: '16 oz Cranberry Juice'},
-                {appleJuice: '16 oz Apple Juice'},
-                {milk: 'Any Requested Milk'},
-                {halfAndHalf: 'Half and Half'}
-            ]
-        }
+    ],
+    bacon: [
+      { cherry: 'Cherry Smoked Bacon'},
+      { apple: 'Apple Hickory Bacon'}
+    ],
+    drinks: [
+      {orangeJuice: '16 oz Orange Juice, Fresh Squeezed'},
+      {grapeFruitJuice: '16 oz GrapeFruit Juice, Fresh Squeezed'},
+      {cranberryJuice: '16 oz Cranberry Juice'},
+      {appleJuice: '16 oz Apple Juice'},
+      {milk: 'Any Requested Milk'},
+      {halfAndHalf: 'Half and Half'}
     ]
   },
   {
@@ -59,21 +55,21 @@ const recipes = [
   },
   {
       boxedLunches: [
-        { title: 'Boxed Lunches' },  
+        { title: 'Boxed Lunches' },
         { headerNotice: 'Every Box contains Fruit Salad, Cheese, a Cracker, Dessert, All Condiments and Utensils'},
         { sandwichNotice: 'Sandwich of Choice - One Sandwich Per Box' },
-        { 
-            filling: ['House-roasted Angus Beef', 'Sky Heaven Ham', 'Smoked Honey Turkey', 'Chicken Salad', 'Tuna Salad', 'Egg Salad', 'Italian 5 Tierra', 'Club Sandwich', 'Vegetarian Wrap', 'Vegan la Bamba']
-        },
-        {
-            breadSelection: ['Rye', 'White', 'Wheat berry', 'Wraps', 'Croissants', 'Multigrain Baguette']
-        },
-        {
-            cheeseSelection: ['Swiss', 'Camembert', 'Provolone', 'Monte Rey', 'Jack']
-        },
         {
             miniGourmetDesserts: "Chef's assortment of 3 bite-sized house prepared cheesecake bites, flourless cakes and bourbon pecan tarts"
         }
+      ],
+      filling: [
+        {house: 'House-roasted Angus Beef'}, {skyHam: 'Sky Heaven Ham'}, {smokedTurkey: 'Smoked Honey Turkey'}, {chickenSalad: 'Chicken Salad'}, {tunaSalad: 'Tuna Salad'}, {eggSalad: 'Egg Salad'}, {italian: 'Italian 5 Tierra'}, {clubSandwich: 'Club Sandwich'}, {vegetarianWrap : 'Vegetarian Wrap'}, {vegan: 'Vegan la Bamba'}
+      ],
+      breadSelection: [
+        {rye: 'Rye'}, {white: 'White'}, {wheatBerry: 'Wheat berry'}, {wraps: 'Wraps'}, {croissants: 'Croissants'}, {multigrainBaguette: 'Multigrain Baguette'}
+      ],
+      cheeseSelection: [
+        {swiss: 'Swiss'}, {camembert: 'Camembert' }, {provolone: 'Provolone'}, {monteRay: 'Monte Rey'}, {jack: 'Jack'}
       ]
   },
   {
@@ -98,10 +94,10 @@ const recipes = [
           },
           {
               grecianSalad: 'A Mediterranean inspired salad of mixed greens topped with artichoke hearts, tomatoes, kalamatas, feta, and toasted pine nuts'
-          },
-          {
-              extras: ['All salads are available with bread', 'All salads are available with chicken, grilled salmon, sliced beef tenderloin or shrimp with an upcharge']
           }
+      ],
+      extras: [
+        {extra1: 'All salads are available with bread'}, {extra2: 'All salads are available with chicken, grilled salmon, sliced beef tenderloin or shrimp with an upcharge'}
       ]
   },
   {
@@ -120,10 +116,10 @@ const recipes = [
           },
           {
               seafoodTray: '3 shrimp / 1 split lobster tail / 2oz crab lump'
-          },
-          {
-              alaCarteApps: ['Miniature Crab Cake', 'Spring Rolls', 'Stuffed Mushroom Caps', 'Chicken or Beek Satay with assorted dipping sauces', 'Grilled or Fried Chicken Fingers with dipping sauce', 'Signature Jumbo Lump Blue Fin Crab with fresh dill, spicy Greek yogurt, on rye crostini']
           }
+      ],
+      alaCarteApps: [
+        {crabCake: 'Miniature Crab Cake'}, {springRolls: 'Spring Rolls'}, {stuffedMushroomCaps: 'Stuffed Mushroom Caps'}, {satay: 'Chicken or Beek Satay with assorted dipping sauces'}, {chickenFingers: 'Grilled or Fried Chicken Fingers with dipping sauce'}, {crabMeal: 'Signature Jumbo Lump Blue Fin Crab with fresh dill, spicy Greek yogurt, on rye crostini'}
       ]
   },
   {
@@ -163,37 +159,50 @@ const recipes = [
       ]
   },
   {
-      pizzas: {
-          grecian: 
-          {
-            title: 'Grecian Pizza',
-            ingreds: 'Pesto, Kalamata, red onion, artichokes, tomatoes, feta, pine nuts, and mozzarella'
-          },
+      pizzas: [
+        {
+          grecian: {
+              title: 'Grecian Pizza',
+              ingreds: 'Pesto, Kalamata, red onion, artichokes, tomatoes, feta, pine nuts, and mozzarella'
+          }
+        },
+        {
           blackenedPizza: {
             title: 'Blackened Chicken Alfredo',
             ingreds: 'Alfredo, blackened chicken, jalapenos, Parmesan and mozzarella'
-          },
+          }
+        },
+        {
           northernWoods: {
             title: 'Northern Woods',
             ingreds: 'Wild mushrooms sauteed in rosemary and garlic. Finished with goat cheese and mozzarella'
-          },
+          }
+        },
+        {
           sicilian: {
             title: 'Sicilian Mount Vesuvio',
             ingreds: 'Pepperoni, salami, ham, capicola, tomatoes, basic, garlic, and mozzarella'
-          },
-          margarita: {
-              title: 'Margarita',
-              ingreds: 'Traditional pizza with tomatoes, onions, basil, garlic and mozzarella'
-          },
-          bigDaddyStonePie: {
-              title: 'Big Daddy Stone Pie',
-              ingreds: 'Deep-dish pie with Italian sausage, peppers, onions, roasted balsamic tomatoes, and mozzarella'
-          },
-          jambo: {
-              title: 'Jambolitos Lovers Pie',
-              ingreds: 'Shrimp, asparagus, and mozzarella'
           }
-      }
+        },
+        {
+          margarita: {
+            title: 'Margarita',
+            ingreds: 'Traditional pizza with tomatoes, onions, basil, garlic and mozzarella'
+          }
+        },
+        {
+          bigDaddyStonePie: {
+            title: 'Big Daddy Stone Pie',
+            ingreds: 'Deep-dish pie with Italian sausage, peppers, onions, roasted balsamic tomatoes, and mozzarella'
+          }
+        },
+        {
+          jambo: {
+            title: 'Jambolitos Lovers Pie',
+            ingreds: 'Shrimp, asparagus, and mozzarella'
+          }
+        }
+    ]
   }
 ];
 

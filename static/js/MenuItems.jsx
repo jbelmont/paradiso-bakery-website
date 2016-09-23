@@ -10,8 +10,6 @@ class MenuItems extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props);
-    console.log(this.state);
     this.setState({
       menuItems: nextProps.menuItems
     });
@@ -19,12 +17,19 @@ class MenuItems extends Component {
 
   render() {
     const container = (
-      this.state.menuItems
-        .map( item => {
-          const list = item[Object.keys(item)];
-          <section>{list}</section>
-          return list;
-        })
+        this.state.menuItems
+          .map( item => {
+            let list = item[Object.keys(item)];
+            if (typeof list === "object") {
+              const title = list["title"];
+              const ingreds = list["ingreds"];
+              <section>{title}</section>,
+              <section>{ingreds}</section>
+            } else {
+              <section>{list}</section>
+            }
+            return list;
+          })
       );
     return (
       <div className="menu_items__container">

@@ -8,14 +8,39 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     const breakfast = this.props.breakfast.reduce( (item) => item)["breakfast"];
-    const breakfastAlaCarte = this.props.breakfastAlaCarte.reduce( (item) => item)["breakfastAlaCarte"];
-    const entreeSalads = this.props.entreeSalads.reduce( (item) => item)["entreeSalads"];
-    const boxedLunches = this.props.entreeSalads.reduce( (item) => item)["boxedLunches"];
-    const gourmetTraysAndApps = this.props.gourmetTraysAndApps.reduce( (item) => item)["gourmetTraysAndApps"];
-    const main = this.props.main.reduce( (item) => item);
+
+    const alaCarte = this.props.breakfastAlaCarte.reduce( (item) => item)["breakfastAlaCarte"];
+    const drinks = this.props.breakfastAlaCarte.reduce( (item) => item)["drinks"];
+    const bacon = this.props.breakfastAlaCarte.reduce( (item) => item)["bacon"];
+    const breakfastAlaCarte = alaCarte.concat(drinks, bacon);
+
+    const entrees = this.props.entreeSalads.reduce( (item) => item)["entreeSalads"];
+    const extras = this.props.entreeSalads.reduce( (item) => item)["extras"];
+    const entreeSalads = entrees.concat(extras);
+
+    const lunches = this.props.boxedLunches.reduce( (item) => item)["boxedLunches"];
+    const filling = this.props.boxedLunches.reduce( (item) => item)["filling"];
+    const breadSelection = this.props.boxedLunches.reduce( (item) => item)["breadSelection"];
+    const cheeseSelection = this.props.boxedLunches.reduce( (item) => item)["cheeseSelection"];
+    const boxedLunches = lunches.concat(filling, breadSelection, cheeseSelection);
+
+    const trays = this.props.gourmetTraysAndApps.reduce( (item) => item)["gourmetTraysAndApps"];
+    const alaCarteApps = this.props.gourmetTraysAndApps.reduce( (item) => item)["alaCarteApps"];
+    const gourmetTraysAndApps = trays.concat(alaCarteApps);
+
+    const mainSelections = this.props.main.reduce( (item) => item)["mainSelections"];
+    const cincinattiFavorites = this.props.main.reduce( (item) => item)["cincinattiFavorites"];
+    const main = mainSelections.concat(cincinattiFavorites);
     const pizza = this.props.pizzas.reduce( (item) => item)["pizzas"];
 
     this.state = {
+      breakfast,
+      breakfastAlaCarte,
+      entreeSalads,
+      boxedLunches,
+      gourmetTraysAndApps,
+      main,
+      pizza,
       menuItemContainer: breakfast
     };
 
@@ -44,13 +69,12 @@ class Menu extends Component {
         return this.state.gourmetTraysAndApps;
       case 'Main Selections':
         return this.state.main;
-      case 'Main Selections':
+      case 'Pizzas':
         return this.state.pizza;
     }
   }
 
   render() {
-    console.log(this.state.menuItemContainer);
     return (
       <div className="menu__container">
         <MenuSideBar itemArea={this._menuItem} />
