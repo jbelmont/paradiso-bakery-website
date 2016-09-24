@@ -31,7 +31,14 @@ class Menu extends Component {
     const mainSelections = this.props.main.reduce( (item) => item)["mainSelections"];
     const cincinattiFavorites = this.props.main.reduce( (item) => item)["cincinattiFavorites"];
     const main = mainSelections.concat(cincinattiFavorites);
-    const pizza = this.props.pizzas.reduce( (item) => item)["pizzas"];
+
+    const pizzas = this.props.pizzas[0]["pizzas"];
+    const pizza = Object.keys(pizzas).map( (pizza) => {
+      return pizzas[pizza].reduce( (curr, item) => {
+        curr[Object.keys(item)] = item;
+        return curr;
+      }, {});
+    });
 
     this.state = {
       breakfast,

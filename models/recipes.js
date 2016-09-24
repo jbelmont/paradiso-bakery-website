@@ -159,50 +159,36 @@ const recipes = [
       ]
   },
   {
-      pizzas: [
-        {
-          grecian: {
-              title: 'Grecian Pizza',
-              ingreds: 'Pesto, Kalamata, red onion, artichokes, tomatoes, feta, pine nuts, and mozzarella'
-          }
-        },
-        {
-          blackenedPizza: {
-            title: 'Blackened Chicken Alfredo',
-            ingreds: 'Alfredo, blackened chicken, jalapenos, Parmesan and mozzarella'
-          }
-        },
-        {
-          northernWoods: {
-            title: 'Northern Woods',
-            ingreds: 'Wild mushrooms sauteed in rosemary and garlic. Finished with goat cheese and mozzarella'
-          }
-        },
-        {
-          sicilian: {
-            title: 'Sicilian Mount Vesuvio',
-            ingreds: 'Pepperoni, salami, ham, capicola, tomatoes, basic, garlic, and mozzarella'
-          }
-        },
-        {
-          margarita: {
-            title: 'Margarita',
-            ingreds: 'Traditional pizza with tomatoes, onions, basil, garlic and mozzarella'
-          }
-        },
-        {
-          bigDaddyStonePie: {
-            title: 'Big Daddy Stone Pie',
-            ingreds: 'Deep-dish pie with Italian sausage, peppers, onions, roasted balsamic tomatoes, and mozzarella'
-          }
-        },
-        {
-          jambo: {
-            title: 'Jambolitos Lovers Pie',
-            ingreds: 'Shrimp, asparagus, and mozzarella'
-          }
-        }
-    ]
+      pizzas: {
+          grecian: [
+            {title: 'Grecian Pizza'},
+            {ingreds: 'Pesto, Kalamata, red onion, artichokes, tomatoes, feta, pine nuts, and mozzarella'}
+          ],
+          blackenedPizza: [
+            {title: 'Blackened Chicken Alfredo'},
+            {ingreds: 'Alfredo, blackened chicken, jalapenos, Parmesan and mozzarella'}
+          ],
+          northernWoods: [
+            {title: 'Northern Woods'},
+            {ingreds: 'Wild mushrooms sauteed in rosemary and garlic. Finished with goat cheese and mozzarella'}
+          ],
+          sicilian: [
+            {title: 'Sicilian Mount Vesuvio'},
+            {ingreds: 'Pepperoni, salami, ham, capicola, tomatoes, basic, garlic, and mozzarella'}
+          ],
+          margarita: [
+            {title: 'Margarita'},
+            {ingreds: 'Traditional pizza with tomatoes, onions, basil, garlic and mozzarella'}
+          ],
+          bigDaddyStonePie: [
+            {title: 'Big Daddy Stone Pie'},
+            {ingreds: 'Deep-dish pie with Italian sausage, peppers, onions, roasted balsamic tomatoes, and mozzarella'}
+          ],
+          jambo: [
+            {title: 'Jambolitos Lovers Pie'},
+            {ingreds: 'Shrimp, asparagus, and mozzarella'}
+          ]
+      }
   }
 ];
 

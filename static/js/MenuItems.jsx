@@ -16,19 +16,24 @@ class MenuItems extends Component {
   }
 
   render() {
+
     const container = (
         this.state.menuItems
           .map( item => {
-            let list = item[Object.keys(item)];
-            if (typeof list === "object") {
-              const title = list["title"];
-              const ingreds = list["ingreds"];
-              <section>{title}</section>,
-              <section>{ingreds}</section>
-            } else {
+            const keyLength = Object.keys(item).length;
+            if (keyLength === 1) {
+              let list = item[Object.keys(item)];
               <section>{list}</section>
+              return list;
+            } else {
+              const pizzas = Object.keys(item).map( (obj) => {
+                return item[obj];
+              });
+              return pizzas.map( (pizza) => {
+                <section>{pizza[Object.keys(pizza)]}</section>
+                return pizza[Object.keys(pizza)];
+              });
             }
-            return list;
           })
       );
     return (
