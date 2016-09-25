@@ -5,28 +5,19 @@ class Bakery extends Component {
 
   constructor(props) {
     super(props);
-    const recipes = JSON.parse(document.getElementById('recipeData').value).recipes;
-    const breakfastAlaCarte = recipes.filter((item) => item["breakfastAlaCarte"]);
-    const breakfast = recipes.filter((item) => item["breakfast"]);
-    const boxedLunches = recipes.filter((item) => item["boxedLunches"]);
-    const entreeSalads = recipes.filter((item) => item["entreeSalads"]);
-    const gourmetTraysAndApps = recipes.filter((item) => item["gourmetTraysAndApps"]);
-    const main = recipes.filter((item) => item["mainSelections"] && item["cincinattiFavorites"]);
-    const pizzas = recipes.filter((item) => item["pizzas"]);
     this.state = {
-      breakfastAlaCarte,
-      breakfast,
-      boxedLunches,
-      entreeSalads,
-      gourmetTraysAndApps,
-      main,
-      pizzas,
+      breakfastAlaCarte: this.props.breakfastAlaCarte,
+      breakfast: this.props.breakfast,
+      boxedLunches: this.props.boxedLunches,
+      entreeSalads: this.props.entreeSalads,
+      gourmetTraysAndApps: this.props.gourmetTraysAndApps,
+      main: this.props.main,
+      pizzas: this.props.pizzas,
       onlyActiveOnIndex: true
     };
   }
 
   render() {
-
     const childrenWithProps = React.cloneElement(this.props.children, {
       breakfastAlaCarte: this.state.breakfastAlaCarte,
       breakfast: this.state.breakfast,
@@ -36,6 +27,7 @@ class Bakery extends Component {
       main: this.state.main,
       pizzas: this.state.pizzas
     });
+
     return (
       <div className="bakery__container">
         <header className="bakery__header-container">

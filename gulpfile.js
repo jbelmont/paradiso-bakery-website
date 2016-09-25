@@ -14,7 +14,7 @@ var livereload = require('gulp-livereload');
 var webpackConfig = require('./webpack.config.js');
 
 var jsPaths = [
-  'static/js/*.js'
+  'static/js/components/*.js'
 ];
 var sassPaths = [
   'static/scss/*.scss',
@@ -96,7 +96,7 @@ gulp.task('watch:js', function() {
     }
     gutil.log('[watch:js]', stats.toString({colors: true, chunks: false}));
   });
-  gulp.watch('static/js/*.js', ['uglify:js', 'build:js']);
+  gulp.watch('static/js/components/*.js', ['uglify:js', 'build:js']);
 });
 
 gulp.task('watch:sass', function() {

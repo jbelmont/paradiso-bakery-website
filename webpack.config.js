@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    App: './static/js/App.jsx'
+    App: './static/js/components/App.jsx'
   },
   output: {
     path: __dirname + '/static/build',
@@ -30,6 +30,11 @@ module.exports = {
     react: 'React'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('development')
+      }
+    }),
     new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})
   ]
 };
