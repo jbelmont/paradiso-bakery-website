@@ -18,7 +18,8 @@ var jsPaths = [
 ];
 var sassPaths = [
   'static/scss/*.scss',
-  './node_modules/normalize.css/normalize.css'
+  './node_modules/normalize.css/normalize.css',
+  './node_modules/purecss/build/pure-min.css'
 ];
 
 var filesToCopy = [
@@ -75,7 +76,7 @@ gulp.task('build:sass', function() {
 });
 
 gulp.task('build:vendor:sass', function() {
-  return gulp.src(sassPaths[1])
+  return gulp.src([sassPaths[1], sassPaths[2]])
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed',
