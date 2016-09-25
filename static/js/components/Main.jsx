@@ -4,7 +4,6 @@ import * as actionCreators from '../actions';
 import Bakery from './Bakery';
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     breakfastAlaCarte: state["breakfastAlaCarte"],
     breakfast: state["breakfast"],
