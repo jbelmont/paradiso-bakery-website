@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Recipe from './Recipe.jsx';
+
 class MenuItems extends Component {
 
   constructor(props) {
@@ -16,29 +18,32 @@ class MenuItems extends Component {
   }
 
   render() {
-
-    const container = (
-        this.state.menuItems
-          .map( item => {
-            const keyLength = Object.keys(item).length;
-            if (keyLength === 1) {
-              let list = item[Object.keys(item)];
-              <section>{list}</section>
-              return list;
-            } else {
-              const pizzas = Object.keys(item).map( (obj) => {
-                return item[obj];
-              });
-              return pizzas.map( (pizza) => {
-                <section>{pizza[Object.keys(pizza)]}</section>
-                return pizza[Object.keys(pizza)];
-              });
-            }
-          })
-      );
+    let list = null, recipeName = null;
+    const recipes = this.state.menuItems
+      .map( item => {
+        const keyLength = Object.keys(item).length;
+        if (keyLength === 1) {
+          recipeName = Object.keys(item);
+          list = item[recipeName];
+          return {
+            list,
+            recipeName
+          };
+        } else {
+          const pizzas = Object.keys(item).map( (obj) => {
+            return item[obj];
+          });
+          return pizzas.map( (pizza) => {
+            return pizza;
+          }).reduce( (curr, pizza) => {
+            curr[pizza] = pizza;
+            return curr;
+          });
+        }
+      });
     return (
       <div className="menu_items__container">
-        {container}
+        {recipes.map( (item) => <Recipe recipeName={item["recipeName"]} ingreds={item["list"]} />)}
       </div>
     );
   }
