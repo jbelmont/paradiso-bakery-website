@@ -13,7 +13,7 @@ class BakeryHome extends Component {
     return (
       <div className="bakery__body-container">
         <div className="bakery__body-container-main-image">
-          <img src={this.state.imagesPath} alt="Paradiso Pastry Chef" />
+          <img className="pure-img" src={this.state.imagesPath} alt="Paradiso Pastry Chef" />
         </div>
       </div>
     );
