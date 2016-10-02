@@ -46,9 +46,6 @@ class Bakery extends Component {
               <Link className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
                 to="/contact">Contact</Link>
-              <Link className='bakery__tabs'
-                activeClassName="bakery__navigation--bottom-border"
-                to="/orders">Orders</Link>
             </ul>
           </nav>
         </div>

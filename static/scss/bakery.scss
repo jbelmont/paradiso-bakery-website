@@ -57,7 +57,7 @@
 }
 
 .bakery__tabs {
-  width: 25%;
+  width: calc(100% / 3);
   height: 2.75em;
   display: flex;
   align-items: center;
@@ -77,5 +77,4 @@
 
 .bakery__navigation--bottom-border {
   border-bottom: 3px solid $header__anchor-hover-color;
-  width: 25%;
 }

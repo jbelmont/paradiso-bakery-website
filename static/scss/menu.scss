@@ -24,11 +24,21 @@
   width: 80%;
   display: flex;
   flex-direction: column;
+
+  &.pure-g {
+    letter-spacing: normal;
+  }
 }
 
 .menu_items__container-recipe {
+
   &-name,
   &-ingreds {
     display: block;
+    padding: 1%;
+  }
+
+  &-name {
+    text-align: center;
   }
 }

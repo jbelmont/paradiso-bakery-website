@@ -52,7 +52,7 @@ class MenuItems extends Component {
     }
 
     return (
-      <div className="menu_items__container">
+      <div className="menu_items__container pure-g">
         {recipes.map( (item) => <Recipe recipeName={item["recipeName"]} ingreds={item["list"]} />)}
       </div>
     );
