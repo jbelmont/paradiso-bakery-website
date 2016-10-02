@@ -48,7 +48,8 @@ class Menu extends Component {
       gourmetTraysAndApps,
       main,
       pizza,
-      menuItemContainer: breakfast
+      menuItemContainer: breakfast,
+      typeOfMenuItem: ''
     };
 
     this._menuItem = this._menuItem.bind(this);
@@ -58,7 +59,8 @@ class Menu extends Component {
   _menuItem(item) {
     const menuItem = this._itemWrapper(item);
     this.setState({
-      menuItemContainer: menuItem
+      menuItemContainer: menuItem,
+      typeOfMenuItem: item
     });
   }
 
@@ -82,10 +84,15 @@ class Menu extends Component {
   }
 
   render() {
+    const {
+      menuItemContainer,
+      typeOfMenuItem
+    } = this.state;
+    
     return (
       <div className="menu__container">
         <MenuSideBar itemArea={this._menuItem} />
-        <MenuItems menuItems={this.state.menuItemContainer} />
+        <MenuItems menuItems={menuItemContainer} typeOfMenuItem={typeOfMenuItem} />
       </div>
     );
   }
