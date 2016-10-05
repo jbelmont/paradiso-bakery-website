@@ -23,8 +23,8 @@ app.use(logger('dev'));
 /**
  * Setup Database Connection
  */
-const connect = db.connect();
-console.log('connect to rethinkdb:', connect);
+const dbActions = db.dbActions();
+winston.log('info', 'Database Actions', {dbActions});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
