@@ -5,9 +5,12 @@ const winston = require('winston');
 
 const recipes = require('./recipes')["recipes"];
 
-const DB = {
-  'DATABASE_NAME': 'paradiso',
-  'TABLE_NAME': 'recipes'
+let connection;
+
+let DB = {
+  DATABASE_NAME: 'paradiso',
+  TABLE_NAME: 'recipes',
+  connection: null
 };
 
 function connectToRethinkDBServer() {
@@ -32,17 +35,15 @@ function doesParadisoExist() {
 }
 
 function createParadisoDB(databaseExists) {
-  return rethinkdb.branch(
-    databaseExists,
-    { dbs_created: 0 },
-    createDB()
-  )
+  if (databaseExists !== undefined && databaseExists && databaseExists.name && databaseExists.name.length === 0) {
+      return createDB()
+        .then(value => value);
+  }
 }
 
 function createDB() {
   try {
-    const creationObject = rethinkdb.dbCreate(DB.DATABASE_NAME);
-    return creationObject;
+    return rethinkdb.dbCreate(DB.DATABASE_NAME).run(DB.connection);
   } catch(err) {
     winston.log('error', 'Database Creation Error', {
       error
@@ -55,28 +56,33 @@ function createTable() {
   return rethinkdb
     .db(DB.DATABASE_NAME)
     .tableCreate(DB.TABLE_NAME)
-    .run();
+    .run(DB.connection);
 }
 
 function insertRecipeData() {
-  return rethinkdb.table(DB.DATABASE_NAME)
-    .insert(recipes);
+  return rethinkdb
+    .db(DB.DATABASE_NAME)
+    .table(DB.TABLE_NAME)
+    .insert(recipes)
+    .run(DB.connection);
 }
 
 function dbActions() {
   return connectToRethinkDBServer()
-    .then(() => {
+    .then((connection) => {
+      DB.connection = connection;
       return doesParadisoExist();
     })
-    .then(() => {
-      return createParadisoDB();
-    })
-    .then(() => {
-      return createTable();
-    })
-    .then(() => {
-      return insertRecipeData();
-    })
+    .then((databaseExists) => {
+      const databaseDoesExist = Array.prototype.slice.call(databaseExists.args).length > 1;
+      if (!databaseDoesExist) {
+        return createParadisoDB(databaseExists)
+          .then(() => createTable())
+          .then(() => insertRecipeData());
+      } else {
+        insertRecipeData();
+      }
+    });
 }
 
 exports.dbActions = dbActions;
