@@ -7,17 +7,20 @@ const recipes = require('./recipes')["recipes"];
 
 let connection;
 
-let DB = {
+const DB = {
   DATABASE_NAME: 'paradiso',
   TABLE_NAME: 'recipes',
-  connection: null
+  connection: null,
+  port: 28015,
+  host: 'localhost'
 };
 
 function connectToRethinkDBServer() {
     return rethinkdb
         .connect({
-            host : 'localhost',
-            port : 28015
+            host : DB.host,
+            port : DB.port,
+            db: DB.DATABASE_NAME
         })
         .then(connect => connect)
         .catch((error) => {
@@ -31,7 +34,9 @@ function connectToRethinkDBServer() {
 function doesParadisoExist() {
   return rethinkdb
     .dbList()
-    .contains(DB.DATABASE_NAME);
+    .contains(DB.DATABASE_NAME)
+    .run(DB.connection)
+    .then(exists => exists);
 }
 
 function createParadisoDB(databaseExists) {
@@ -61,26 +66,59 @@ function createTable() {
 
 function insertRecipeData() {
   return rethinkdb
-    .db(DB.DATABASE_NAME)
     .table(DB.TABLE_NAME)
     .insert(recipes)
     .run(DB.connection);
+}
+
+function checkIfRecipesExists() {
+  return rethinkdb
+    .table(DB.TABLE_NAME)
+    .count()
+    .run(DB.connection)
+    .then((count) => {
+      return count;
+    });
+}
+
+function getRecipes() {
+  return rethinkdb
+    .table(DB.TABLE_NAME)
+    .run(DB.connection)
+    .then(cursor => {
+      return cursor
+        .toArray()
+        .then(values => {
+          console.log(values);
+          return values;
+        })
+    }); 
 }
 
 function dbActions() {
   return connectToRethinkDBServer()
     .then((connection) => {
       DB.connection = connection;
-      return doesParadisoExist();
+      return doesParadisoExist()
+        .then(exists => exists);
     })
     .then((databaseExists) => {
-      const databaseDoesExist = Array.prototype.slice.call(databaseExists.args).length > 1;
-      if (!databaseDoesExist) {
+      if (!databaseExists) {
         return createParadisoDB(databaseExists)
           .then(() => createTable())
           .then(() => insertRecipeData());
       } else {
-        insertRecipeData();
+        checkIfRecipesExists()
+        .then(value => {
+          if (value > 0) {
+            return getRecipes();
+          } else {
+            return insertRecipeData()
+              .then(() => {
+                return getRecipes();
+              });
+          }
+        });
       }
     });
 }
