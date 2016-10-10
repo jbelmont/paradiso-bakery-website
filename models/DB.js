@@ -61,14 +61,16 @@ function createTable() {
   return rethinkdb
     .db(DB.DATABASE_NAME)
     .tableCreate(DB.TABLE_NAME)
-    .run(DB.connection);
+    .run(DB.connection)
+    .then(connection => connection);
 }
 
 function insertRecipeData() {
   return rethinkdb
     .table(DB.TABLE_NAME)
     .insert(recipes)
-    .run(DB.connection);
+    .run(DB.connection)
+    .then(results => results);
 }
 
 function checkIfRecipesExists() {
@@ -89,7 +91,6 @@ function getRecipes() {
       return cursor
         .toArray()
         .then(values => {
-          console.log(values);
           return values;
         })
     }); 
@@ -107,20 +108,27 @@ function dbActions() {
         return createParadisoDB(databaseExists)
           .then(() => createTable())
           .then(() => insertRecipeData());
-      } else {
-        checkIfRecipesExists()
+      }
+    })
+    .then(() => {
+      return checkIfRecipesExists()
         .then(value => {
           if (value > 0) {
-            return getRecipes();
+            return getRecipes()
+              .then(values => {
+                return values;
+              });
           } else {
-            return insertRecipeData()
+            insertRecipeData()
               .then(() => {
-                return getRecipes();
+                return getRecipes()
+                  .then(values => {
+                    return values;
+                  });
               });
           }
         });
-      }
-    });
+      });
 }
 
 exports.dbActions = dbActions;

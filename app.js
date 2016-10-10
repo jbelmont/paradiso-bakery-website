@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 
-const db = require('./models/db');
 const routes = require('./routes/index');
 
 const app = express();
@@ -19,12 +18,6 @@ app.set('view engine', 'hbs');
 
 app.use(favicon(path.join(__dirname, 'static/images', 'favicon.ico')));
 app.use(logger('dev'));
-
-/**
- * Setup Database Connection
- */
-const dbActions = db.dbActions();
-winston.log('info', 'Database Actions', {dbActions});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
