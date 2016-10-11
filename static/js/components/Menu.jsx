@@ -5,6 +5,16 @@ import MenuItems from './MenuItems.jsx';
 
 class Menu extends Component {
 
+  static propTypes = {
+    breakfastAlaCarte: React.PropTypes.array,
+    breakfast: React.PropTypes.array,
+    boxedLunches: React.PropTypes.array,
+    entreeSalads: React.PropTypes.array,
+    gourmetTraysAndApps: React.PropTypes.array,
+    main: React.PropTypes.array,
+    pizzas: React.PropTypes.object
+  };
+
   constructor(props) {
     super(props);
     const breakfast = this.props.breakfast.reduce( (item) => item)["breakfast"];

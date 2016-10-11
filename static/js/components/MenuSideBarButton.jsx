@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class MenuSideBarButton extends Component {
 
+  static propTypes = {
+    menuitem: React.propTypes.string
+  };
+
   constructor(props) {
     super(props);
     this._menuItemClick = this._menuItemClick.bind(this);

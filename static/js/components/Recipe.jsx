@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 
 class MenuItems extends Component {
 
+  static propTypes = {
+    recipeName: React.propTypes.string,
+    ingreds: React.propTypes.string
+  };
+
   constructor(props) {
     super(props);
     this.state = {
