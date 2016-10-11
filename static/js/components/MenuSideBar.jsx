@@ -13,7 +13,10 @@ class MenuSideBar extends Component {
 
   render() {
     const {menuitems} = this.state;
-    const menuitemlist = menuitems.map( (item) => <MenuSideBarButton itemArea={this.props.itemArea} menuitem={item} />);
+    const keys = menuitems.map((val, index, arr) => {
+      return `${val.split(" ")[0].toLowerCase()}${index}`;
+    });
+    const menuitemlist = menuitems.map( (item, index) => <MenuSideBarButton itemArea={this.props.itemArea} menuitem={item} key={keys[index]} />);
     return (
       <aside className="menu_sidebar__container">
         {menuitemlist}
