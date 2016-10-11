@@ -6,7 +6,7 @@ class MenuItems extends Component {
 
   static propTypes = {
     menuItems: React.PropTypes.array,
-    typeOfMenuItem: React.propTypes.string
+    typeOfMenuItem: React.PropTypes.string
   };
 
   constructor(props) {

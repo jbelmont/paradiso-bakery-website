@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class MenuSideBarButton extends Component {
 
   static propTypes = {
-    menuitem: React.propTypes.string
+    menuitem: React.PropTypes.string
   };
 
   constructor(props) {

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class MenuItems extends Component {
 
   static propTypes = {
-    recipeName: React.propTypes.string,
-    ingreds: React.propTypes.string
+    recipeName: React.PropTypes.string,
+    ingreds: React.PropTypes.string
   };
 
   constructor(props) {
