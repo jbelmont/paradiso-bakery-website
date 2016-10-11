@@ -2,3 +2,4 @@
 node_modules/
 static/build/
 rethinkdb_data/
+.tests/__snapshots__/*
