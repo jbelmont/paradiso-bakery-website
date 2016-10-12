@@ -11,7 +11,14 @@ var merge = require('merge-stream');
 var nodemon = require('gulp-nodemon');
 var livereload = require('gulp-livereload');
 
-var webpackConfig = require('./webpack.config.js');
+// Load Environment Variables
+require('dotenv').config();
+var webpackConfig;
+if (process.env.NODE_ENV === 'production') {
+  webpackConfig = require('./webpack.config.js');
+} else {
+  webpackConfig = require('./webpack.config.prod.js');
+}
 
 var jsPaths = [
   'static/js/components/*.js'

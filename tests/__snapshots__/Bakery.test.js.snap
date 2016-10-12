@@ -1,0 +1,42 @@
+exports[`test Show Links in Main bakery site 1`] = `
+<aside
+  className="menu_sidebar__container">
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Breakfast
+  </button>
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Breakfast Ala Carte
+  </button>
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Boxed Lunches
+  </button>
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Entree Salads
+  </button>
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Gourmet Trays and Appetizers
+  </button>
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Main Selections
+  </button>
+  <button
+    className="menu_sidebar_button__container"
+    onClick={[Function]}>
+    Pizzas
+  </button>
+  <div
+    className="bottom-sidebar-space" />
+</aside>
+`;
