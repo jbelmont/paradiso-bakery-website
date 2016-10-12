@@ -12,6 +12,9 @@ const routes = require('./routes/index');
 
 const app = express();
 
+// Load Environment Variables
+require('dotenv').config();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

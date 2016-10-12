@@ -8,11 +8,11 @@ const recipes = require('./recipes')["recipes"];
 let connection;
 
 const DB = {
-  DATABASE_NAME: 'paradiso',
-  TABLE_NAME: 'recipes',
+  DATABASE_NAME: process.env.DATABASE_NAME || 'paradiso',
+  TABLE_NAME: process.env.TABLE_NAME || 'recipes',
   connection: null,
-  port: 28015,
-  host: 'localhost'
+  port: process.env.DB_PORT || 28015,
+  host: process.env.DB_HOST || 'localhost'
 };
 
 function connectToRethinkDBServer() {
