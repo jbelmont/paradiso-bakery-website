@@ -40,7 +40,7 @@ function doesParadisoExist() {
 }
 
 function createParadisoDB(databaseExists) {
-  if (databaseExists !== undefined && databaseExists && databaseExists.name && databaseExists.name.length === 0) {
+  if (!databaseExists) {
       return createDB()
         .then(value => value);
   }
