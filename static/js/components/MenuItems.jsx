@@ -4,6 +4,11 @@ import Recipe from './Recipe.jsx';
 
 class MenuItems extends Component {
 
+  static propTypes = {
+    menuItems: React.PropTypes.array,
+    typeOfMenuItem: React.PropTypes.string
+  };
+
   constructor(props) {
     super(props);
     this.state = {

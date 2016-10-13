@@ -4,9 +4,7 @@ class BakeryFooter extends Component {
 
   render() {
     return (
-      <div className="bakery__footer-container">
-
-      </div>
+      <div className="bakery__footer-container"></div>
     );
   }
 
