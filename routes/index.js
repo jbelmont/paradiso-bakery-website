@@ -10,7 +10,7 @@ const winston = require('winston');
  * Create Database, table and insert values if necessary
  * Else grab values from Recipes table to use for client
  */
-const db = require('../models/db');
+const db = require(path.join(__dirname, '../models/db'));
 
 db.dbActions()
   .then(values => {
