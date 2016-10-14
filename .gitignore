@@ -2,6 +2,11 @@
 node_modules/
 static/build/
 rethinkdb_data/
-.tests/__snapshots__/*
+tests/__snapshots__/*
 .env
 tmp/*
+*.pem
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
