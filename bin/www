@@ -4,11 +4,6 @@
  * Module dependencies.
  */
 
-
-
-// Load Environment Variables
-require('dotenv').config();
-
 var app = require('../app');
 var debug = require('debug')('paradiso-bakery-website:server');
 var https = require('https');

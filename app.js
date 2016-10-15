@@ -8,8 +8,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 
-const routes = require('./routes/index');
+// Load Environment Variables
+require(path.join(__dirname, 'config/config'))["loadEnvironmentVars"];
 
+const routes = require('./routes/index');
 const app = express();
 
 // view engine setup
