@@ -12,6 +12,8 @@ const winston = require('winston');
 require(path.join(__dirname, 'config/config'))["loadEnvironmentVars"];
 
 const routes = require('./routes/index');
+const payments = require('./payments/stripePayments');
+
 const app = express();
 
 // view engine setup
@@ -28,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'static')));
 
 app.use('/', routes);
+app.use('/api/v1/payments', payments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

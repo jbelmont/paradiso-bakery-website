@@ -10,11 +10,20 @@ const card = {
     card: require('./data/creditCard')["creditCard"]
 };
 
-test('Test stripe createToken api', () => {
-//   stripe.tokens
-//     .create(card)
-//     .then(token => {
-//         console.log(JSON.stringify(token));
-//     })
-//     .fail(err => winston.log('error', 'Database Connection Error', {error}));
+describe('Test Stripe Api calls', () => {
+    it('Test stripe createToken api', (done) => {
+        stripe.tokens
+            .create(card)
+            .then(token => {
+                console.log(JSON.stringify(token));
+                expect(token).toContain(token["id"]);
+                done();
+            })
+            .catch(err => {
+                if (err) {
+                    winston.log('error', 'Database Connection Error', {err})
+                }
+                done(err);
+            });
+    });
 });
