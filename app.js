@@ -13,6 +13,7 @@ require(path.join(__dirname, 'config/config'))["loadEnvironmentVars"];
 
 const routes = require('./routes/index');
 const payments = require('./payments/stripePayments');
+const admin = require('./admin/enableAdmin');
 
 const app = express();
 
@@ -30,21 +31,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'static')));
 
 app.use('/', routes);
+// Load payments api and admin interface api.
 app.use('/api/v1/payments', payments);
+app.use('/api/v1/enableAdmin', admin);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+/**
+ * catch 404 and forward to error handler
+ */
+app.use((req, res, next) => {
   let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
+/**
+ * development error handler
+ * will print stacktrace
+ */
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -53,9 +58,11 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+/**
+ * production error handler
+ * no stacktraces leaked to user
+ * */ 
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
