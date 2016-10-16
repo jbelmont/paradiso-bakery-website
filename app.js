@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 app.use('/', routes);
 // Load payments api and admin interface api.
 app.use('/api/v1/payments', payments);
-app.use('/api/v1/enableAdmin', admin);
+app.use('/api/v1/admin', admin);
 
 /**
  * catch 404 and forward to error handler

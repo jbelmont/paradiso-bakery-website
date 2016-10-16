@@ -15,7 +15,7 @@ router.post('/createToken', function(req, res, next) {
     return stripe.tokens
         .create(card)
         .then(token => res.json(token))
-        .catch(err => winston.log('error', 'Database Connection Error', {err}));
+        .catch(err => winston.log('error', 'Error Creating token for stripe', {err}));
 });
 
 module.exports = router;
