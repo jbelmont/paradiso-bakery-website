@@ -19,6 +19,7 @@
     "express": "~4.13.1",
     "gulp-nodemon": "^2.1.0",
     "hbs": "^4.0.0",
+    "jsonwebtoken": "^7.1.9",
     "morgan": "~1.6.1",
     "node-sass-middleware": "0.8.0",
     "object-assign": "^4.1.0",
