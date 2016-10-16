@@ -26,14 +26,15 @@ router.post('/enableAdmin', function(req, res, next) {
         winston.log('error', 'Error Creating json web token', {err});
         res.send(err);
       }
-      res.json({
+      res.status(200).json({
         adminToken: token
       });
     });
+  } else {
+    const moduleName = 'enableAdmin';
+    const error = new Error('Error signing token for admin');
+    res.status(400).send(errorHandler.generateError(error, moduleName, 400));
   }
-  const moduleName = 'enableAdmin';
-  const error = new Error('Error signing token for admin');
-  res.send(errorHandler.generateError(error, moduleName, 400));
 });
 
 module.exports = router;

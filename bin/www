@@ -7,6 +7,7 @@
 const app = require('../app');
 const debug = require('debug')('paradiso-bakery-website:server');
 const https = require('https');
+const path = require('path');
 const fs = require('fs');
 
 /**
@@ -16,8 +17,8 @@ const port = normalizePort(process.env.PORT);
 const IP_ADDRESS = process.env.IP_ADDRESS;
 
 const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
+  key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
 };
 
 app.set('port', port);
