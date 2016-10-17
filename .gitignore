@@ -5,6 +5,7 @@ rethinkdb_data/
 tests/__snapshots__/*
 .env
 tmp/*
+ca/*
 *.pem
 .vscode/*
 !.vscode/settings.json
