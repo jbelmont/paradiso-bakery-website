@@ -1,4 +1,13 @@
 language: node_js
+
+cache:
+  directories:
+    - node_modules
+
 node_js:
   - 4.5.x
+
+install:
+  - npm install
+
 script: npm run build
