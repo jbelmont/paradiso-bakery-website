@@ -1,5 +1,6 @@
 {
   "name": "paradiso-bakery-website",
+  "ipAddr": "104.131.117.137",
   "version": "0.0.1",
   "private": true,
   "scripts": {
