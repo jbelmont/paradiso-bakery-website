@@ -95,7 +95,7 @@ gulp.task('build:vendor:sass', () => {
 gulp.task('watch:js', () => {
   let config = Object.create(webpackConfig);
   config.watch = true;
-  webpack(config, function(err, stats) {
+  webpack(config, (err, stats) => {
     if (err) {
       throw new gutil.PluginError('watch:js', err);
     }
