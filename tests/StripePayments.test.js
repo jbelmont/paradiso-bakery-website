@@ -10,20 +10,42 @@ const card = {
     card: require('./data/creditCard')["creditCard"]
 };
 
+let stripeCharge = {
+    charge: require('./data/chargeInfo')["charge"]
+};
+
 describe('Test Stripe Api calls', () => {
-    it('Test stripe createToken api', (done) => {
+
+    it('should return a token when calling stripe api', (done) => {
         stripe.tokens
             .create(card)
             .then(token => {
-                console.log(JSON.stringify(token));
-                expect(token).toContain(token["id"]);
+                const {id} = token;
+                stripeCharge["charge"]["source"] = id;
+                expect(token["id"]).toBeDefined();
                 done();
             })
             .catch(err => {
                 if (err) {
-                    winston.log('error', 'Database Connection Error', {err})
+                    winston.log('error', 'Stripe Token api error', {err})
+                    done(err);
                 }
-                done(err);
+                done();
             });
     });
+
+    it('should return a charge when calling stripe api', (done) => {
+        stripe.charges.create(stripeCharge["charge"])
+            .then(charge => {
+                expect(charge["id"]).toBeDefined();
+                done();
+            })
+            .catch(err => {
+                if (err && err.type === 'StripeCardError') {
+                    winston.log('error', 'Stripe Card Error', {err});
+                    done(err);
+                }
+                done(err);
+            })
+    })
 });

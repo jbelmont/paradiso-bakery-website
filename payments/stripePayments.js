@@ -18,8 +18,16 @@ router.post('/createToken', (req, res, next) => {
         .catch(err => winston.log('error', 'Error Creating token for stripe', {err}));
 });
 
-router.post('/createPayment', (req, res, next) => {
-    
+router.post('/receivePayment', (req, res, next) => {
+    const {stripeToken} = req.body;
+    return stripe.charges.create({
+        amount: 1000, // Amount in cents
+        currency: "usd",
+        source: stripeToken,
+        description: "Example charge"
+    })
+    .then(charge => res.send(charge))
+    .catch(err => winston.log('error', 'Error Creating Charge for stripe', {err}));
 });
 
 module.exports = router;
