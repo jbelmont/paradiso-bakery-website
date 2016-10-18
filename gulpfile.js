@@ -39,6 +39,18 @@ var filesToCopy = [
 		dest: './static/build'
   },
   {
+    src: './node_modules/reveal.js/js/reveal.js',
+    dest: './static/build'
+  },
+  {
+    src: './node_modules/reveal.js/css/reveal.css',
+    dest: './static/build' 
+  },
+  {
+    src: './node_modules/reveal.js/css/theme/moon.css',
+    dest: './static/build' 
+  },
+  {
     src: './static/images/paradiso.jpg',
     dest: './static/build'
   }
