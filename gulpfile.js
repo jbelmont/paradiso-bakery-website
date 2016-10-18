@@ -1,35 +1,32 @@
-var gulp = require('gulp');
-var webpack = require('webpack');
-var sourcemaps = require('gulp-sourcemaps');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var runSequence = require('run-sequence');
-var gutil = require('gulp-util');
-var merge = require('merge-stream');
-var nodemon = require('gulp-nodemon');
-var livereload = require('gulp-livereload');
+const gulp = require('gulp');
+const webpack = require('webpack');
+const sourcemaps = require('gulp-sourcemaps');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
+const runSequence = require('run-sequence');
+const gutil = require('gulp-util');
+const merge = require('merge-stream');
+const nodemon = require('gulp-nodemon');
+const livereload = require('gulp-livereload');
 
-// Load Environment Variables
+// Load Environment constiables
 require('dotenv').config();
-var webpackConfig;
-if (process.env.NODE_ENV === 'production') {
-  webpackConfig = require('./webpack.config.js');
-} else {
-  webpackConfig = require('./webpack.config.prod.js');
-}
+const webpackConfig = process.env.NODE_ENV === 'production'
+  ? require('./webpack.config.js')
+  : require('./webpack.config.prod.js');
 
-var jsPaths = [
+const jsPaths = [
   'static/js/components/*.js'
 ];
-var sassPaths = [
+const sassPaths = [
   'static/scss/*.scss',
   './node_modules/normalize.css/normalize.css',
   './node_modules/purecss/build/pure-min.css'
 ];
 
-var filesToCopy = [
+const filesToCopy = [
   {
 		src: './node_modules/react/dist/react.min.js',
 		dest: './static/build'
@@ -44,22 +41,22 @@ var filesToCopy = [
   }
 ];
 
-gulp.task('copy:react:files', function() {
-	var streams = [];
-	filesToCopy.forEach(function(file) {
+gulp.task('copy:react:files', () => {
+	const streams = [];
+	filesToCopy.forEach(file => {
 		streams.push(gulp.src(file.src).pipe(gulp.dest(file.dest)));
 	});
 	return merge.apply(this, streams);
 });
 
-gulp.task('uglify:js', function() {
+gulp.task('uglify:js', () => {
   return gulp.src(jsPaths)
     .pipe(uglify())
     .pipe(gulp.dest('static/build'));
 });
 
-gulp.task('build:js', function(callback) {
-  webpack(Object.create(webpackConfig), function(err, stats) {
+gulp.task('build:js', (callback) => {
+  webpack(Object.create(webpackConfig), (err, stats) => {
     if (err) {
       throw new gutil.PluginError('build:js', err);
     }
@@ -68,7 +65,7 @@ gulp.task('build:js', function(callback) {
   });
 });
 
-gulp.task('build:sass', function() {
+gulp.task('build:sass', () => {
   return gulp.src(sassPaths[0])
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -82,7 +79,7 @@ gulp.task('build:sass', function() {
     .pipe(livereload());
 });
 
-gulp.task('build:vendor:sass', function() {
+gulp.task('build:vendor:sass', () => {
   return gulp.src([sassPaths[1], sassPaths[2]])
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -95,8 +92,8 @@ gulp.task('build:vendor:sass', function() {
     .pipe(gulp.dest('./static/build'));
 });
 
-gulp.task('watch:js', function() {
-  var config = Object.create(webpackConfig);
+gulp.task('watch:js', () => {
+  let config = Object.create(webpackConfig);
   config.watch = true;
   webpack(config, function(err, stats) {
     if (err) {
@@ -107,11 +104,11 @@ gulp.task('watch:js', function() {
   gulp.watch('static/js/components/*.js', ['uglify:js', 'build:js']);
 });
 
-gulp.task('watch:sass', function() {
+gulp.task('watch:sass', () => {
   gulp.watch('./static/scss/*.scss', ['build:sass']);
 });
 
-gulp.task('start', function() {
+gulp.task('start', () => {
   nodemon({
     script: './bin/www',
     ignore: ['static/*'],
@@ -119,11 +116,11 @@ gulp.task('start', function() {
   });
 });
 
-gulp.task('build', function(cb) {
+gulp.task('build', (cb) => {
   runSequence('copy:react:files', 'uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
 });
 
-gulp.task('dev', function(cb) {
+gulp.task('dev', (cb) => {
   livereload.listen();
   runSequence('copy:react:files', 'uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
 });

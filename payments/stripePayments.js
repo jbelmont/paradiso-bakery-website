@@ -11,11 +11,15 @@ const card = {
 };
 
 /* Create Stripe token to be used for paradiso payments. */
-router.post('/createToken', function(req, res, next) {
+router.post('/createToken', (req, res, next) => {
     return stripe.tokens
         .create(card)
         .then(token => res.json(token))
         .catch(err => winston.log('error', 'Error Creating token for stripe', {err}));
+});
+
+router.post('/createPayment', (req, res, next) => {
+    
 });
 
 module.exports = router;

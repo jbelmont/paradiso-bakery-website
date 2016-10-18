@@ -12,9 +12,12 @@ const jwt = require('jsonwebtoken');
 const errorHandler = require('../errorHandler');
 
 /* Create Stripe token to be used for paradiso payments. */
-router.post('/enableAdmin', function(req, res, next) {
-  const admin = req.body.admin;
-  const name = req.body.name;
+router.post('/enableAdmin', (req, res, next) => {
+  const {
+    admin,
+    name
+  } = req.body;
+
   if (admin) {
     // sign with RSA SHA256
     const cert = fs.readFileSync(path.join(__dirname, '../ca/ca.key'));
