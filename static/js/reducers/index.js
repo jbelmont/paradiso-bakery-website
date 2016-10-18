@@ -6,7 +6,7 @@ import boxedLunches from './boxedLunches';
 import breakfastAlaCarte from './breakfastAlaCarte';
 import entreeSalads from './entreeSalads';
 import gourmetTraysAndApps from './gourmetTraysAndApps';
-import main from './breakfast';
+import main from './main';
 import pizzas from './pizzas';
 
 export const rootReducer = combineReducers(

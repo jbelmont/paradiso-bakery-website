@@ -6,6 +6,7 @@ tests/__snapshots__/*
 .env
 tmp/*
 ca/*
+npm-debug.log
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
