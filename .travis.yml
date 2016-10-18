@@ -11,3 +11,6 @@ install:
   - npm install
 
 script: npm run build
+
+after_success:
+  - bash scripts/deploy.sh
