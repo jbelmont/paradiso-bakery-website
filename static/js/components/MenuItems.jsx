@@ -15,6 +15,8 @@ class MenuItems extends Component {
       menuItems: this.props.menuItems,
       menuType: this.props.typeOfMenuItem
     };
+
+    this._deCamelifyRecipeName = this._deCamelifyRecipeName.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,6 +24,19 @@ class MenuItems extends Component {
       menuItems: nextProps.menuItems,
       menuType: nextProps.typeOfMenuItem
     });
+  }
+
+  _deCamelifyRecipeName(recipeName) {
+    const name = Array.isArray(recipeName) ? recipeName[0] : recipeName;
+    return name
+      .split(/(?=[A-Z])/)
+      .map((chars, index, arr) => {
+        if (index === 0) {
+          return `${chars[0].toUpperCase()}${chars.slice(1)}`;
+        }
+        return chars;
+      })
+      .join(' ');
   }
 
   render() {
@@ -58,7 +73,7 @@ class MenuItems extends Component {
 
     return (
       <div className="menu_items__container pure-g">
-        {recipes.map( (item) => <Recipe recipeName={item["recipeName"]} ingreds={item["list"]} />)}
+        {recipes.map( (item) => <Recipe recipeName={this._deCamelifyRecipeName(item["recipeName"])} ingreds={item["list"]} />)}
       </div>
     );
   }
