@@ -23,7 +23,8 @@ const jsPaths = [
 const sassPaths = [
   'static/scss/*.scss',
   './node_modules/normalize.css/normalize.css',
-  './node_modules/purecss/build/pure-min.css'
+  './node_modules/purecss/build/pure-min.css',
+  './node_modules/font-awesome/css/font-awesome.min.css'
 ];
 
 const filesToCopy = [
@@ -37,6 +38,11 @@ const filesToCopy = [
   },
   {
     src: './static/images/paradiso.jpg',
+    dest: './static/build'
+  },
+
+  {
+    src: './node_modules/font-awesome/fonts/fontawesome-webfont.svg',
     dest: './static/build'
   }
 ];

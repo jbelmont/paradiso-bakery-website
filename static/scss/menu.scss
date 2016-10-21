@@ -55,6 +55,11 @@
 
 .menu_items__container-recipe {
 
+  &:hover {
+    opacity: 0.4;
+    background-color: #8e8c87;
+    cursor: pointer;
+  }
   &-name,
   &-ingreds {
     display: block;
