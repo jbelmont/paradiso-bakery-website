@@ -7,7 +7,7 @@ class MenuSideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuitems: ['Breakfast', 'Breakfast Ala Carte','Boxed Lunches', 'Entree Salads', 'Gourmet Trays and Appetizers', 'Main Selections', 'Pizzas']
+      menuitems: ['Breakfast', 'Breakfast Ala Carte','Boxed Lunches', 'Entree Salads', 'Gourmet Trays', 'Main Selections', 'Pizzas']
     };
   }
 
@@ -18,10 +18,9 @@ class MenuSideBar extends Component {
     });
     const menuitemlist = menuitems.map( (item, index) => <MenuSideBarButton itemArea={this.props.itemArea} menuitem={item} key={keys[index]} />);
     return (
-      <aside className="menu_sidebar__container">
+      <ul className="pure-menu custom-restricted-width menu_sidebar__container">
         {menuitemlist}
-        <div className="bottom-sidebar-space"></div>
-      </aside>
+      </ul>
     );
   }
 

@@ -18,7 +18,9 @@ class MenuSideBarButton extends Component {
   render() {
     const {menuitem} = this.props;
     return (
-      <button className="menu_sidebar_button__container" onClick={this._menuItemClick}>{menuitem}</button>
+      <button className="pure-button menu_sidebar_button__container" onClick={this._menuItemClick}>
+        {menuitem}
+      </button>
     );
   }
 

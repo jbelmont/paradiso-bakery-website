@@ -84,7 +84,7 @@ class Menu extends Component {
         return this.state.boxedLunches;
       case 'Entree Salads':
         return this.state.entreeSalads;
-      case 'Gourmet Trays and Appetizers':
+      case 'Gourmet Trays':
         return this.state.gourmetTraysAndApps;
       case 'Main Selections':
         return this.state.main;
@@ -100,7 +100,7 @@ class Menu extends Component {
     } = this.state;
     
     return (
-      <div className="menu__container">
+      <div className="pure-menu custom-restricted-width menu__container">
         <MenuSideBar itemArea={this._menuItem} />
         <MenuItems menuItems={menuItemContainer} typeOfMenuItem={typeOfMenuItem} />
       </div>
