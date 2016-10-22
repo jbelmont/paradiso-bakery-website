@@ -13,6 +13,16 @@
 
 .bakery__header-container {
 
+  .bakery__checkout-container {
+    display: flex;
+    justify-content: flex-end;
+    
+    > svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
   background-color: lighten($header__background-color, 20%);
   width: 100%;
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
+import BakeryCheckout from './BakeryCheckout';
+
 class Bakery extends Component {
 
   static propTypes = {
@@ -43,6 +45,7 @@ class Bakery extends Component {
         <header className="bakery__header-container">
         <div className="bakery__header-container-label">
           <p>Jean Pauls Paradiso</p>
+          <BakeryCheckout />
         </div>
         <div className="bakery__header-container-tabs">
           <nav className="bakery__header-container-tabs-nav">

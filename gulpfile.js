@@ -23,8 +23,7 @@ const jsPaths = [
 const sassPaths = [
   'static/scss/*.scss',
   './node_modules/normalize.css/normalize.css',
-  './node_modules/purecss/build/pure-min.css',
-  './node_modules/font-awesome/css/font-awesome.min.css'
+  './node_modules/purecss/build/pure-min.css'
 ];
 
 const filesToCopy = [
@@ -42,7 +41,7 @@ const filesToCopy = [
   },
 
   {
-    src: './node_modules/font-awesome/fonts/fontawesome-webfont.svg',
+    src: './icomoon/symbol-defs.svg',
     dest: './static/build'
   }
 ];
@@ -86,7 +85,7 @@ gulp.task('build:sass', () => {
 });
 
 gulp.task('build:vendor:sass', () => {
-  return gulp.src([sassPaths[1], sassPaths[2]])
+  return gulp.src([...sassPaths.slice(1)])
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed',
