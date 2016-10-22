@@ -4,42 +4,17 @@ import { Link, IndexLink } from 'react-router';
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
 
-class Bakery extends Component {
+class BakeryCheckoutArea extends Component {
 
-  static propTypes = {
-    breakfastAlaCarte: React.PropTypes.array,
-    breakfast: React.PropTypes.array,
-    boxedLunches: React.PropTypes.array,
-    entreeSalads: React.PropTypes.array,
-    gourmetTraysAndApps: React.PropTypes.array,
-    main: React.PropTypes.array,
-    pizzas: React.PropTypes.object
-  };
-
-  constructor(props) {
+ constructor(props) {
     super(props);
     this.state = {
-      breakfastAlaCarte: this.props.breakfastAlaCarte,
-      breakfast: this.props.breakfast,
-      boxedLunches: this.props.boxedLunches,
-      entreeSalads: this.props.entreeSalads,
-      gourmetTraysAndApps: this.props.gourmetTraysAndApps,
-      main: this.props.main,
-      pizzas: this.props.pizzas,
-      onlyActiveOnIndex: true
+        cartItems: ['Pizzas', 'Bread', 'Pastries']
     };
   }
 
   render() {
-    const childrenWithProps = React.cloneElement(this.props.children, {
-      breakfastAlaCarte: this.state.breakfastAlaCarte,
-      breakfast: this.state.breakfast,
-      boxedLunches: this.state.boxedLunches,
-      entreeSalads: this.state.entreeSalads,
-      gourmetTraysAndApps: this.state.gourmetTraysAndApps,
-      main: this.state.main,
-      pizzas: this.state.pizzas
-    });
+    const cartStuff = (this.state.cartItems.map(item => <div>{item}</div>));
 
     return (
       <div className="bakery__container">
@@ -67,10 +42,11 @@ class Bakery extends Component {
           </nav>
         </div>
         </header>
-        {childrenWithProps}
+        {cartStuff}
       </div>
     );
   }
+
 }
 
-export default Bakery;
+export default BakeryCheckoutArea;

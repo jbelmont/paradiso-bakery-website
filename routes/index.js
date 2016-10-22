@@ -38,6 +38,10 @@ db.dbActions()
     router.get('/orders', function(req, res, next) {
       res.render('index', data);
     });
+
+    router.get('/checkout', function(req, res, next) {
+      res.render('index', data);
+    })
   });
 
 module.exports = router;

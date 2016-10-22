@@ -7,6 +7,7 @@ import Main from './Main.jsx';
 import BakeryHome from './BakeryHome.jsx';
 import Menu from './Menu.jsx';
 import Contact from './Contact.jsx';
+import BakeryCheckoutArea from './BakeryCheckoutArea.jsx';
 
 import store, { history } from '../store/store';
 
@@ -18,6 +19,7 @@ const router = (
         <Route path="/menu" component={Menu}></Route>
         <Route path="/contact" component={Contact}></Route>
       </Route>
+      <Route path="/checkout" component={BakeryCheckoutArea}></Route>
     </Router>
   </Provider>
 );
