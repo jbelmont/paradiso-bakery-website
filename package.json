@@ -59,6 +59,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
+    "icomoon-free-npm": "0.0.0",
     "jest": "^16.0.1",
     "merge-stream": "^1.0.0",
     "node-sass": "^3.7.0",

@@ -6,6 +6,7 @@ tests/__snapshots__/*
 .env
 tmp/*
 ca/*
+.DS_Store
 npm-debug.log
 .vscode/*
 !.vscode/settings.json
