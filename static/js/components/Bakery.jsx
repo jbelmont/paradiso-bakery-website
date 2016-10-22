@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
 import BakeryCheckout from './BakeryCheckout';
+import UserProfile from './UserProfile';
 
 class Bakery extends Component {
 
@@ -45,7 +46,10 @@ class Bakery extends Component {
         <header className="bakery__header-container">
         <div className="bakery__header-container-label">
           <p>Jean Pauls Paradiso</p>
-          <BakeryCheckout />
+          <div className="bakery__header-container-action">
+            <BakeryCheckout />
+            <UserProfile />
+          </div>
         </div>
         <div className="bakery__header-container-tabs">
           <nav className="bakery__header-container-tabs-nav">

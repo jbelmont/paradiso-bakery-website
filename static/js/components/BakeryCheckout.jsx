@@ -11,7 +11,7 @@ class BakeryCheckout extends Component {
 
   render() {
     return (
-      <span className="bakery__checkout-container">
+      <span className="bakery__header-container-action-checkout">
         <svg xmlns="http://www.w3.org/2000/svg">
           <use xlinkHref={this.state.cartSvgPath}></use>
         </svg>

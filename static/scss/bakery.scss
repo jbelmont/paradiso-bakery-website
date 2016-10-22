@@ -17,15 +17,29 @@ html {
 
 .bakery__header-container {
 
-  .bakery__checkout-container {
+  &-action {
     display: flex;
-    width: 42%;
+    width: 46%;
+  }
+
+  &-action-user,
+  &-action-checkout {
+    display: flex;
     justify-content: flex-end;
 
     > svg {
       width: 1.5rem;
       height: 1.5rem;
+      fill: #DBF1FF;
+      cursor: pointer;
     }
+  }
+
+  &-action-user {
+    width: 10%;
+  }
+  &-action-checkout {
+    width: 88%;
   }
 
   background-color: lighten($header__background-color, 20%);
