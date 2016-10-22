@@ -1,5 +1,9 @@
 @import "colors";
 
+html {
+  font-size: 16px;
+}
+
 #bakeryContainer {
   height: 100%;
   width: 100%;
@@ -15,11 +19,12 @@
 
   .bakery__checkout-container {
     display: flex;
+    width: 42%;
     justify-content: flex-end;
-    
+
     > svg {
-      width: 25px;
-      height: 25px;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 
@@ -30,10 +35,11 @@
   background-color: lighten($header__background-color, 35%);
     display: flex;
     align-items: center;
-    justify-content: center;
 
     > p {
-      width: 100;
+      width: 56%;
+      display: flex;
+      justify-content: flex-end;
       color: $white;
     }
   }
