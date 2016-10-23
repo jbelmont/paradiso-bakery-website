@@ -11,7 +11,8 @@ function mapStateToProps(state) {
     entreeSalads: state["entreeSalads"],
     gourmetTraysAndApps: state["gourmetTraysAndApps"],
     main: state["main"],
-    pizzas: state["pizzas"]
+    pizzas: state["pizzas"],
+    checkoutItems: {}
   }
 }
 

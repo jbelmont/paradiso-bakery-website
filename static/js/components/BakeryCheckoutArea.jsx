@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
+import store from '../store/store';
+
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
 
@@ -9,12 +11,19 @@ class BakeryCheckoutArea extends Component {
  constructor(props) {
     super(props);
     this.state = {
-        cartItems: ['Pizzas', 'Bread', 'Pastries']
+        cartItems: []
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      cartItems: nextProps.cartItems
+    });
+  }
+
   render() {
-    const cartStuff = (this.state.cartItems.map(item => <div>{item}</div>));
+    const cart = store.getState() && store.getState()["checkoutCart"];
+    const cartStuff = (cart && cart.length > 0 && cart.map(item => <div>{item["cartItems"]}</div>));
 
     return (
       <div className="bakery__container">

@@ -23,7 +23,8 @@ function getStateObject(recipes) {
     entreeSalads,
     gourmetTraysAndApps,
     main,
-    pizzas
+    pizzas,
+    checkoutCart: []
   };
 }
 

@@ -8,9 +8,18 @@ import entreeSalads from './entreeSalads';
 import gourmetTraysAndApps from './gourmetTraysAndApps';
 import main from './main';
 import pizzas from './pizzas';
+import checkoutCart from './checkoutCart';
 
-export const rootReducer = combineReducers(
-  { breakfast, breakfastAlaCarte, boxedLunches, entreeSalads, gourmetTraysAndApps, main, pizzas, routing: routerReducer }
-);
+export const rootReducer = combineReducers({ 
+    breakfast, 
+    breakfastAlaCarte, 
+    boxedLunches, 
+    entreeSalads, 
+    gourmetTraysAndApps, 
+    main,
+    pizzas, 
+    checkoutCart, 
+    routing: routerReducer 
+});
 
 export default rootReducer;
