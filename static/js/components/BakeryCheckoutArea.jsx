@@ -62,6 +62,7 @@ class BakeryCheckoutArea extends Component {
         </div>
         </header>
         <div className="bakery__checkout-container">
+          <div className="bakery__checkout-container-progress-bar"></div>
           {cartContainer}
         </div>
       </div>
