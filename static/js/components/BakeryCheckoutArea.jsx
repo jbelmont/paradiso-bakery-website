@@ -23,7 +23,17 @@ class BakeryCheckoutArea extends Component {
 
   render() {
     const cart = store.getState() && store.getState()["checkoutCart"];
-    const cartStuff = (cart && cart.length > 0 && cart.map(item => <div>{item["cartItems"]}</div>));
+
+    let cartContainer;
+    if (cart && cart.length > 0) {
+      cartContainer = (
+        cart.map(item => <div className="bakery__checkout-container-cart-item">{item["cartItems"]}</div>)
+      );
+    } else {
+      cartContainer = (
+        <h4 className="bakery__checkout-container-empty-cart">You have no items in your shopping cart!</h4>
+      );
+    }
 
     return (
       <div className="bakery__container">
@@ -51,7 +61,9 @@ class BakeryCheckoutArea extends Component {
           </nav>
         </div>
         </header>
-        {cartStuff}
+        <div className="bakery__checkout-container">
+          {cartContainer}
+        </div>
       </div>
     );
   }
