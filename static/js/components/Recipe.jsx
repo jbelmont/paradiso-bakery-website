@@ -4,6 +4,7 @@ import {addToCart} from '../actions/index';
 import store from '../store/store';
 
 let cart = [];
+let cartLength = 0;
 class MenuItems extends Component {
 
   static propTypes = {
@@ -37,7 +38,11 @@ class MenuItems extends Component {
     });
     if (!hasCartBeenAdded) {
       cart.push(item);
-      store.dispatch(addToCart({ item }));
+      cartLength++;
+      store.dispatch(addToCart({ 
+        item,
+        cartLength 
+      }));
     }
   }
 

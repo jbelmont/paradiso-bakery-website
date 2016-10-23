@@ -31,7 +31,7 @@ class BakeryCheckoutArea extends Component {
         <div className="bakery__header-container-label">
           <p>Jean Pauls Paradiso</p>
           <div className="bakery__header-container-action">
-            <BakeryCheckout to="/checkout" />
+            <BakeryCheckout to="/checkout" cartLength={cart && cart.length} />
             <UserProfile />
           </div>
         </div>

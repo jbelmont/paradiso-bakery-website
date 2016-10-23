@@ -80,10 +80,10 @@
   > button {
     display: flex;
     align-items: center;
+    background-color: rgba(31, 138, 214, 0.62);
 
     &:hover {
-      opacity: 0.6;
-      background-color: #8e8c87;
+      opacity: 0.5;
       cursor: pointer;
     }
   }
@@ -91,12 +91,13 @@
   .menu_item-checkout-icon {
     width: 1.5rem;
     height: 1.5rem;
-    fill: #1b435e;
+    fill: white;
     cursor: pointer;
   }
   .menu_item-checkout-text {
     display: flex;
     padding-left: 15%;
-    width: 5em;
+    width: 3.5em;
+    color: white;
   }
 }

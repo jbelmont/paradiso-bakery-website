@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
+import store from '../store/store';
+
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
 
@@ -26,7 +28,8 @@ class Bakery extends Component {
       gourmetTraysAndApps: this.props.gourmetTraysAndApps,
       main: this.props.main,
       pizzas: this.props.pizzas,
-      onlyActiveOnIndex: true
+      onlyActiveOnIndex: true,
+      cartLength: 0
     };
   }
 
@@ -41,13 +44,16 @@ class Bakery extends Component {
       pizzas: this.state.pizzas
     });
 
+    const cartLength = store.getState()["checkoutCart"] 
+      && store.getState()["checkoutCart"].length
+
     return (
       <div className="bakery__container">
         <header className="bakery__header-container">
         <div className="bakery__header-container-label">
           <p>Jean Pauls Paradiso</p>
           <div className="bakery__header-container-action">
-            <BakeryCheckout to="/checkout" />
+            <BakeryCheckout to="/checkout" cartLength={cartLength || this.state.cartLength} />
             <UserProfile />
           </div>
         </div>
