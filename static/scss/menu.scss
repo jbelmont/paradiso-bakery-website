@@ -55,11 +55,6 @@
 
 .menu_items__container-recipe {
 
-  &:hover {
-    opacity: 0.4;
-    background-color: #8e8c87;
-    cursor: pointer;
-  }
   &-name,
   &-ingreds {
     display: block;
@@ -73,5 +68,35 @@
 
   &-ingreds {
     line-height: 1.375em;
+  }
+}
+
+.menu_item__container-recipe-add-to-cart {
+  display: flex;
+  justify-content: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  > button {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      opacity: 0.6;
+      background-color: #8e8c87;
+      cursor: pointer;
+    }
+  }
+
+  .menu_item-checkout-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #1b435e;
+    cursor: pointer;
+  }
+  .menu_item-checkout-text {
+    display: flex;
+    padding-left: 15%;
+    width: 5em;
   }
 }

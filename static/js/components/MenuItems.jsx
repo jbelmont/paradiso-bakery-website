@@ -6,14 +6,16 @@ class MenuItems extends Component {
 
   static propTypes = {
     menuItems: React.PropTypes.array,
-    typeOfMenuItem: React.PropTypes.string
+    typeOfMenuItem: React.PropTypes.string,
+    addToCartSvgPath: React.PropTypes.string
   };
 
   constructor(props) {
     super(props);
     this.state = {
       menuItems: this.props.menuItems,
-      menuType: this.props.typeOfMenuItem
+      menuType: this.props.typeOfMenuItem,
+      addToCartSvgPath: this.props.addToCartSvgPath
     };
 
     this._deCamelifyRecipeName = this._deCamelifyRecipeName.bind(this);
@@ -41,7 +43,12 @@ class MenuItems extends Component {
 
   render() {
     let list = null, recipeName = null, recipes;
-    const {menuType, menuItems } = this.state;
+    const {
+      menuType, 
+      menuItems, 
+      addToCartSvgPath
+    } = this.state;
+
     if (menuType.toLowerCase() === 'pizzas') {
       recipes = menuItems
         .map( item => {
@@ -73,7 +80,8 @@ class MenuItems extends Component {
 
     return (
       <div className="menu_items__container pure-g">
-        {recipes.map( (item) => <Recipe recipeName={this._deCamelifyRecipeName(item["recipeName"])} ingreds={item["list"]} />)}
+        {recipes.map( (item) => <Recipe recipeName={this._deCamelifyRecipeName(item["recipeName"])} 
+                                        ingreds={item["list"]} addToCartSvgPath={addToCartSvgPath} />)}
       </div>
     );
   }

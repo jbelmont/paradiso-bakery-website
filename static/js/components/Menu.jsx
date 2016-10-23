@@ -59,7 +59,8 @@ class Menu extends Component {
       main,
       pizza,
       menuItemContainer: breakfast,
-      typeOfMenuItem: ''
+      typeOfMenuItem: '',
+      addToCartSvgPath: './build/symbol-defs.svg#icon-cart'
     };
 
     this._menuItem = this._menuItem.bind(this);
@@ -96,13 +97,18 @@ class Menu extends Component {
   render() {
     const {
       menuItemContainer,
-      typeOfMenuItem
+      typeOfMenuItem,
+      addToCartSvgPath
     } = this.state;
     
     return (
       <div className="pure-menu custom-restricted-width menu__container">
         <MenuSideBar itemArea={this._menuItem} />
-        <MenuItems menuItems={menuItemContainer} typeOfMenuItem={typeOfMenuItem} />
+        <MenuItems 
+          menuItems={menuItemContainer} 
+          typeOfMenuItem={typeOfMenuItem}
+          addToCartSvgPath={addToCartSvgPath}
+        />
       </div>
     );
   }
