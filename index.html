@@ -25,20 +25,347 @@
 					<p>RethinkDB</p>
 				</section>  
                 <section>
-					<h3>App Structure: </h3>
+					<p>Server starts at bin/www by setting port and grabbing self signed certificate before launching https server.</p>
 					<pre><code data-trim class="javascript">	
-var port = normalizePort(process.env.PORT);
-var IP_ADDRESS = process.env.IP_ADDRESS;
+/**
+ * Get port from environment and store in Express.
+ */
+const port = normalizePort(process.env.PORT);
+const IP_ADDRESS = process.env.IP_ADDRESS;
 
-var options = {
-	key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
-	cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
+const options = {
+  key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
 };
 
 app.set('port', port);
-var server = https.createServer(options, app);
+const server = https.createServer(options, app);
 					</code></pre>
-				</section>            
+				</section>         
+				<section>
+					<p>app.js is where logic begins for the Server.</p>
+					<p>Setting view rendering engine</p>
+					<p>Set middleware layer to parse json</p>
+					<p>Set routes that connect with express.js</p>
+					<pre><code data-trim class="javascript">
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+app.use(favicon(path.join(__dirname, 'static/images', 'favicon.ico')));
+app.use(logger('dev'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, 'static')));
+
+app.use('/', routes);
+// Load payments api and admin interface api.
+app.use('/api/v1/payments', payments);
+app.use('/api/v1/admin', admin);
+					</code></pre>
+				</section>   
+				<section>
+					<h4>Express.js serves as middleware for node.js wrapping request and response with special properties and methods.</h4>
+					<p>Easily handle CRUD (Create, Read, Update, Delete) operations with express.js </p>
+					<pre>
+						<code data-trim class="javascript">
+router.post('/receivePayment', (req, res, next) => {
+    const {stripeToken} = req.body;
+    return stripe.charges.create({
+        amount: 1000, // Amount in cents
+        currency: "usd",
+        source: stripeToken,
+        description: "Example charge"
+    })
+    .then(charge => res.send(charge))
+    .catch(err => winston.log('error', 'Error Creating Charge for stripe', {err}));
+});
+
+module.exports = router;
+						</code>
+					</pre>
+				</section>  
+				<section>
+					<h4>Include your own modules by using Node.js commonjs pattern</h4>
+					<pre>
+						<code data-trim class="javascript">
+"use strict";
+const rethinkdb = require('rethinkdb');
+const winston = require('winston');
+const recipes = require('./recipes')["recipes"];
+const DB = { DATABASE_NAME: process.env.DATABASE_NAME || 'paradiso',
+...
+};
+function dbActions() {
+  return connectToRethinkDBServer()
+    .then((connection) => {
+      DB.connection = connection;
+      return doesParadisoExist()
+        .then(exists => exists);
+    })
+	...
+}
+exports.dbActions = dbActions;
+						</code>
+					</pre>
+				</section>    
+				<section>
+					<p>Here is a simple module that loads environment variables held in a hidden file.</p>
+					<pre>
+						<code>
+module.exports = {
+    loadEnvironmentVars: require('dotenv').config()
+}
+						</code>
+					</pre>
+				</section>   
+				<section>
+					<h5>Setup ES2015 with webpack babel and choose a build tool like gulp or use npm scripts.</h5>
+					<p>Webpack is a module bundler that is configurable and has a large plugin ecosystem.</p>
+					<p>Babel is a JavaScript Transpiler that has many plugins for newer javascript features and for libraries such as react.js</p>
+					<pre>
+						<code data-trim class="javascript">
+/* jshint browserify: true */
+const webpack = require('webpack');
+
+module.exports = {
+  entry: {
+    App: './static/js/components/App.jsx'
+  },
+  output: {
+    path: __dirname + '/static/build',
+    filename: '[name].js'
+  },
+  devtool: 'source-map',
+  module: {
+    loaders: [{
+      test: /\.jsx?$/,
+      loader: 'babel',
+      query: {
+        presets:['es2015','react', 'stage-0']
+      }
+    },{
+      test: /\.scss$/,
+      loader: 'style!css!autoprefixer!sass?sourceMap'
+    }]
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
+  externals: {
+    react: 'React'
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
+    }),
+    new webpack.HotModuleReplacementPlugin()
+  ]
+};
+
+// .babelrc 
+{ 
+    "presets": ["es2015", "react", "stage-0"] 
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<p>Setup npm scripts that hook into gulp tasks or utilize npm scripts to do all of the features of gulp.</p>
+					<pre>
+						<code data-trim class="javascript">
+// gulpfile here							
+gulp.task('start', () => {
+  nodemon({
+    script: './bin/www',
+    ignore: ['static/*'],
+    env: { 'PORT': '3000' }
+  });
+});
+
+gulp.task('build', (cb) => {
+  runSequence('copy:react:files', 'uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
+});
+
+// npm scripts
+"scripts": {
+    "clean:build": "rimraf ./static/build",
+    "lint:watch": "npm run lint -- --watch",
+    "lint": "esw static/js",
+    "prestart:dev": "npm run clean:build",
+    "start:dev": "gulp dev",
+    "build": "npm run clean:build && gulp build",
+    "test": "jest tests"
+  }
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h5>Now for the FrontEnd Logic: </h5>
+					<p>React.js is a powerful library built for user interfaces</p>
+					<p>Redux is a predictable state container for JavaScript apps.</p>
+					<p>React Router is a complete routing library for React.</p>
+					<p>FrontEnd Architecture for this app begins inside static/js</p>
+					<p>The folder structure is using a pattern in redux where you store reducers, actions, and the store in their own scope.</p>
+					<p>There is a some work to figuring how to connect react router, redux and react together.</p>
+				</section>
+				<section>
+					<h5>App Logic begins in App.jsx</h5>
+					<pre>
+						<code data-trim class="javascript">
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Provider } from 'react-redux';
+
+import Main from './Main.jsx';
+import BakeryHome from './BakeryHome.jsx';
+import Menu from './Menu.jsx';
+import Contact from './Contact.jsx';
+import BakeryCheckoutArea from './BakeryCheckoutArea.jsx';
+
+import store, { history } from '../store/store';
+
+const router = (
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={Main}>
+        <IndexRoute component={BakeryHome}></IndexRoute>
+        <Route path="/menu" component={Menu}></Route>
+        <Route path="/contact" component={Contact}></Route>
+      </Route>
+      <Route path="/checkout" component={BakeryCheckoutArea}></Route>
+    </Router>
+  </Provider>
+);
+
+render(router, document.getElementById('bakeryContainer'));		
+						</code>
+					</pre>
+				</section>
+				<section>
+					<section>
+					<p>In Redux you dispatch actions to the store.</p>
+					<p> Use reducers to initiate state change.</p>
+					<p>Component dispatches action to the Redux Store</p>
+					<pre>
+						<code data-trim class="javascript">
+  _addToCart(evt) {
+    const item = evt.currentTarget.dataset["recipeName"];
+    const hasCartBeenAdded = cart.some(cartItem => {
+      return cartItem === item;
+    });
+    if (!hasCartBeenAdded) {
+      cart.push(item);
+      cartLength++;
+      store.dispatch(addToCart({ 
+        item,
+        cartLength 
+      }));
+    }
+  }		
+						</code>
+					</pre>
+					</section>
+					<section>
+					<p>Action is handled here: </p>
+					<pre>
+						<code data-trim class="javascript">
+export function addToCart({item, cartLength}) {
+  return {
+    type: 'ADD_TO_CART',
+    item,
+    cartLength
+  };
+}							
+						</code>
+					</pre>
+					</section>
+					<section>
+						<p>Reducer updates state with Redux Store</p>
+						<pre>
+							<code data-trim class="javascript">
+function checkoutCart(state = [], action) {
+    const {
+        type,
+        item,
+        cartLength
+    } = action;
+    
+    switch (type) {
+        case 'ADD_TO_CART':
+            return [
+                ...state,
+                {
+                    cartLength,
+                    cartItems: item
+                }
+            ];
+        default:
+            return state;
+    }
+}
+
+export default checkoutCart;	
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h5>Testing in React.js can be done using the Jest Testing Library.</h5>
+						<p>Jest uses a concept called snapshot testing in order to do some integration testing.</p>
+						<pre>
+							<code data-trim class="javascript">
+import renderer from 'react-test-renderer';
+import React from 'react';
+
+import MenuSideBar from '../static/js/components/MenuSideBar.jsx';
+
+test('Show Links in Main bakery site', () => {
+const menuitems = ['Breakfast', 'Breakfast Ala Carte','Boxed Lunches', 'Entree Salads', 'Gourmet Trays and Appetizers', 'Main Selections', 'Pizzas'];
+const tree = renderer.create(
+<MenuSideBar menuitems={menuitems} />
+).toJSON();
+expect(tree).toMatchSnapshot();
+});							
+							</code>
+						</pre>
+					</section>
+					<section>
+						<h6>Unit tests with Jest can be easily done with builtin assert statements.</h6>
+						<p>You can use describe and it blocks to do bdd (behavior-driven development) style assertions.</p>
+						<pre>
+							<code data-trim class="javascript" data-noescape>
+it('should return a token when calling stripe api', (done) => {
+stripe.tokens
+	.create(card)
+	.then(token => {
+		const {id} = token;
+		stripeCharge["charge"]["source"] = id;
+		expect(token["id"]).toBeDefined();
+		done();
+	})
+	.catch(err => {
+		if (err) {
+			winston.log('error', 'Stripe Token api error', {err})
+			done(err);
+		}
+		done();
+	});
+});						
+							</code>
+						</pre>
+					</section>
+				</section>
+				<section>
+					<h5>Demo Time!!!</h5>
+				</section>
         </div>
 		<script src="lib/head.min.js"></script>
         <script src="reveal.js"></script>
@@ -54,7 +381,9 @@ var server = https.createServer(options, app);
 					{ 
 						src: 'plugins/highlight/highlight.js', 
 						async: true, 
-						callback: function() { hljs.initHighlightingOnLoad(); } 
+						callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+						} 
 					}
 				]
 			});
