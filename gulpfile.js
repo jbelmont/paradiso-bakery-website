@@ -1,62 +1,31 @@
 var gulp = require('gulp');
-var webpack = require('webpack');
-var sourcemaps = require('gulp-sourcemaps');
-var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var merge = require('merge-stream');
-var nodemon = require('gulp-nodemon');
-var livereload = require('gulp-livereload');
-
-// Load Environment Variables
-require('dotenv').config();
-var webpackConfig;
-if (process.env.NODE_ENV === 'production') {
-  webpackConfig = require('./webpack.config.js');
-} else {
-  webpackConfig = require('./webpack.config.prod.js');
-}
-
-var jsPaths = [
-  'static/js/components/*.js'
-];
-var sassPaths = [
-  'static/scss/*.scss',
-  './node_modules/normalize.css/normalize.css',
-  './node_modules/purecss/build/pure-min.css'
-];
 
 var filesToCopy = [
   {
-		src: './node_modules/react/dist/react.min.js',
-		dest: './static/build'
-	},
-  {
-    src: './node_modules/react-dom/dist/react-dom.min.js',
-		dest: './static/build'
-  },
-  {
     src: './node_modules/reveal.js/js/reveal.js',
-    dest: './static/build'
+    dest: '.'
   },
   {
     src: './node_modules/reveal.js/css/reveal.css',
-    dest: './static/build' 
+    dest: '.' 
   },
   {
     src: './node_modules/reveal.js/css/theme/moon.css',
-    dest: './static/build' 
+    dest: '.' 
   },
   {
-    src: './static/images/paradiso.jpg',
-    dest: './static/build'
+    src: './node_modules/reveal.js/plugin/**/*',
+    dest: './plugins'
   }
 ];
 
-gulp.task('copy:react:files', function() {
+gulp.task('copy:reveal.js:files', function() {
 	var streams = [];
 	filesToCopy.forEach(function(file) {
 		streams.push(gulp.src(file.src).pipe(gulp.dest(file.dest)));
@@ -64,78 +33,6 @@ gulp.task('copy:react:files', function() {
 	return merge.apply(this, streams);
 });
 
-gulp.task('uglify:js', function() {
-  return gulp.src(jsPaths)
-    .pipe(uglify())
-    .pipe(gulp.dest('static/build'));
-});
-
-gulp.task('build:js', function(callback) {
-  webpack(Object.create(webpackConfig), function(err, stats) {
-    if (err) {
-      throw new gutil.PluginError('build:js', err);
-    }
-    gutil.log('[build:js]', stats.toString({colors: true, chunks: false}));
-    callback();
-  });
-});
-
-gulp.task('build:sass', function() {
-  return gulp.src(sassPaths[0])
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'compressed',
-      includePaths: ['node_modules']
-    }))
-    .pipe(autoprefixer({cascade: false}))
-    .pipe(concat('bakery.css'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./static/build'))
-    .pipe(livereload());
-});
-
-gulp.task('build:vendor:sass', function() {
-  return gulp.src([sassPaths[1], sassPaths[2]])
-    .pipe(sourcemaps.init())
-    .pipe(sass({
-      outputStyle: 'compressed',
-      includePaths: ['node_modules']
-    }))
-    .pipe(autoprefixer({cascade: false}))
-    .pipe(concat('vendor.css'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./static/build'));
-});
-
-gulp.task('watch:js', function() {
-  var config = Object.create(webpackConfig);
-  config.watch = true;
-  webpack(config, function(err, stats) {
-    if (err) {
-      throw new gutil.PluginError('watch:js', err);
-    }
-    gutil.log('[watch:js]', stats.toString({colors: true, chunks: false}));
-  });
-  gulp.watch('static/js/components/*.js', ['uglify:js', 'build:js']);
-});
-
-gulp.task('watch:sass', function() {
-  gulp.watch('./static/scss/*.scss', ['build:sass']);
-});
-
-gulp.task('start', function() {
-  nodemon({
-    script: './bin/www',
-    ignore: ['static/*'],
-    env: { 'PORT': '3000' }
-  });
-});
-
 gulp.task('build', function(cb) {
-  runSequence('copy:react:files', 'uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
-});
-
-gulp.task('dev', function(cb) {
-  livereload.listen();
-  runSequence('copy:react:files', 'uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
+  runSequence('copy:reveal.js:files',  cb);
 });

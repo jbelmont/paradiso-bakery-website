@@ -25,17 +25,19 @@
 				</section>  
                 <section>
 					<h3>App Structure: </h3>
-					<pre><code data-trim class="javascript">
-					const port = normalizePort(process.env.PORT);
-					const IP_ADDRESS = process.env.IP_ADDRESS;
+					<pre><code class="javascript">
+					function() {	
+						const port = normalizePort(process.env.PORT);
+						const IP_ADDRESS = process.env.IP_ADDRESS;
 
-					const options = {
-					key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
-					cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
-					};
+						const options = {
+						key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
+						cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
+						};
 
-					app.set('port', port);
-					const server = https.createServer(options, app);
+						app.set('port', port);
+						const server = https.createServer(options, app);
+					}
 					</code></pre>
 				</section>            
         </div>
@@ -47,7 +49,15 @@
 				history: true,
 				center: true,
 				transition: 'convex',                
-				dependencies: []
+				dependencies: [
+					// Syntax highlight for <code> elements
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					// MathJax
+        			{ src: 'plugin/math/math.js', async: true }
+					// Zoom in and out with Alt+click
+        			{ src: 'plugin/zoom-js/zoom.js', async: true },
+					
+				]
 			});
 		</script>
     </body>
