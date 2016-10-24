@@ -2,7 +2,9 @@ function checkoutCart(state = [], action) {
     const {
         type,
         item,
-        cartLength
+        cartLength,
+        price,
+        quantity
     } = action;
     
     switch (type) {
@@ -11,6 +13,8 @@ function checkoutCart(state = [], action) {
                 ...state,
                 {
                     cartLength,
+                    price,
+                    quantity,
                     cartItems: item
                 }
             ];

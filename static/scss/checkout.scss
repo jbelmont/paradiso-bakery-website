@@ -5,6 +5,12 @@
 
     &-cart-item {
         display: flex;
+
+        td {
+            display: flex;
+            justify-content: center;
+            width: calc(100% / 3);
+        }
     }
 
     &-empty-cart {
@@ -61,9 +67,22 @@
 }
 
 .bakery__checkout-container-shopping-cart {
+    padding-top: 2%;
+
+    &-header-row th {
+        width: calc(100% / 3);
+        display: flex;
+        justify-content: center;
+    }
+
     .bakery__checkout-container-shopping-cart-table {
         display: flex;
         flex-direction: column;
+
+        thead > tr {
+            display: flex;
+            width: 100%;
+        }
     }
     .checkout-edit-btn,
     .checkout-remove-btn {

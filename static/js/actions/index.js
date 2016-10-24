@@ -1,7 +1,9 @@
-export function addToCart({item, cartLength}) {
+export function addToCart({item, cartLength, price, quantity}) {
   return {
     type: 'ADD_TO_CART',
     item,
-    cartLength
+    cartLength,
+    quantity,
+    price
   };
 }

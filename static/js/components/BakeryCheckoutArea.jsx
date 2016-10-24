@@ -28,7 +28,12 @@ class BakeryCheckoutArea extends Component {
     let cartContainer, progressBarContainer;
     if (cart && cart.length > 0) {
       cartContainer = (
-        cart.map(item => <tr className="bakery__checkout-container-cart-item"><td>{item["cartItems"]}</td></tr>)
+        cart.map(item => <tr className="bakery__checkout-container-cart-item">
+          <td>{item["cartItems"]}</td>
+          <td>{item["quantity"]}</td>
+          <td>{item["price"]}</td>
+          </tr>
+        )
       );
 
       progressBarContainer = (
@@ -42,7 +47,7 @@ class BakeryCheckoutArea extends Component {
           <div className="bakery__checkout-container-shopping-cart">
             <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
               <thead>
-                <tr>
+                <tr className="bakery__checkout-container-shopping-cart-header-row">
                   <th>Item</th>
                   <th>Quantity</th>
                   <th>Price</th>
@@ -91,7 +96,6 @@ class BakeryCheckoutArea extends Component {
         </header>
         <div className="bakery__checkout-container">
           {progressBarContainer}
-          {cartContainer}
         </div>
       </div>
     );

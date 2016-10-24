@@ -30,19 +30,21 @@ class MenuItems extends Component {
 
   _deCamelifyRecipeName(recipeName) {
     const name = Array.isArray(recipeName) ? recipeName[0] : recipeName;
-    return name
-      .split(/(?=[A-Z])/)
-      .map((chars, index, arr) => {
-        if (index === 0) {
-          return `${chars[0].toUpperCase()}${chars.slice(1)}`;
-        }
-        return chars;
-      })
-      .join(' ');
+    if (name && name.length > 0) {
+      return name
+        .split(/(?=[A-Z])/)
+        .map((chars, index, arr) => {
+          if (index === 0) {
+            return `${chars[0].toUpperCase()}${chars.slice(1)}`;
+          }
+          return chars;
+        })
+        .join(' ');
+    }
   }
 
   render() {
-    let list = null, recipeName = null, recipes;
+    let list = null, recipeName = null, price = null, recipes;
     const {
       menuType, 
       menuItems, 
@@ -60,28 +62,34 @@ class MenuItems extends Component {
             list: item[
               Object.keys(item)
               .filter(item => item === "ingreds")
-            ]["ingreds"]
+            ]["ingreds"],
+            price: item[
+              Object.keys(item)
+              .filter(item => item === "price")
+            ]["price"]
           };
         });
     } else {
       recipes = menuItems
         .map( item => {
           const keyLength = Object.keys(item).length;
-          if (keyLength === 1) {
-            recipeName = Object.keys(item);
-            list = item[recipeName];
-            return {
-              list,
-              recipeName
-            };
-          }
+          recipeName = Object.keys(item).filter(key => key !== 'price')[0];
+          price = item[Object.keys(item).filter(key => key === "price")] || 0.00;
+          list = recipeName && item[recipeName];
+          return {
+            list,
+            price,
+            recipeName: recipeName
+          };
         });
     }
 
     return (
       <div className="menu_items__container pure-g">
         {recipes.map( (item) => <Recipe recipeName={this._deCamelifyRecipeName(item["recipeName"])} 
-                                        ingreds={item["list"]} addToCartSvgPath={addToCartSvgPath} />)}
+                                        price={item["price"]}
+                                        ingreds={item["list"]} 
+                                        addToCartSvgPath={addToCartSvgPath} />)}
       </div>
     );
   }
