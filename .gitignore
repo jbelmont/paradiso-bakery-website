@@ -4,6 +4,7 @@ static/build/
 rethinkdb_data/
 tests/__snapshots__/*
 .env
+.DS_STORE
 tmp/*
 ca/*
 scripts/*
