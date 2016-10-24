@@ -1,7 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="reveal.css">
-        <link rel="stylesheet" href="league-gothic.css">
+        <link rel="stylesheet" href="lib/font/league-gothic/league-gothic.css">
         <link rel="stylesheet" href="css/moon.css">
     </head>
     <body>
@@ -51,11 +51,11 @@
 				transition: 'convex',                
 				dependencies: [
 					// Syntax highlight for <code> elements
-					{ src: 'plugins/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					// MathJax
-        			{ src: 'plugins/math/math.js', async: true },
-					// Zoom in and out with Alt+click
-        			{ src: 'plugins/zoom-js/zoom.js', async: true }
+					{ 
+						src: 'plugins/highlight/highlight.js', 
+						async: true, 
+						callback: function() { hljs.initHighlightingOnLoad(); } 
+					}
 				]
 			});
 		</script>
