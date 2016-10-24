@@ -49,17 +49,14 @@
 				transition: 'convex',                
 				dependencies: [
 					// Syntax highlight for <code> elements
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugins/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 					// MathJax
-        			{ src: 'plugin/math/math.js', async: true }
+        			{ src: 'plugins/math/math.js', async: true }
 					// Zoom in and out with Alt+click
-        			{ src: 'plugin/zoom-js/zoom.js', async: true },
-					// Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-
+        			{ src: 'plugins/zoom-js/zoom.js', async: true },
 					// Interpret Markdown in <section> elements
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+					{ src: 'plugins/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugins/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
 				]
 			});
 		</script>
