@@ -16,7 +16,15 @@ var filesToCopy = [
     dest: '.' 
   },
   {
-    src: './node_modules/reveal.js/css/theme/moon.css',
+    src: './node_modules/reveal.js/css/theme/*.css',
+    dest: './css' 
+  },
+  {
+    src: './node_modules/reveal.js/lib/js/*',
+    dest: './lib' 
+  },
+  {
+    src: './node_modules/reveal.js/lib/font/league-gothic/*',
     dest: '.' 
   },
   {
