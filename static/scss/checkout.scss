@@ -15,6 +15,60 @@
         display: flex;
         justify-content: center;
     }
+
+    &-progress-bar {
+        list-style: none;
+    }
+    &-progress-bar-edit,
+    &-progress-bar-checkout {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 1.5em;
+        background-color: #009AFF;
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #009AFF;
+            cursor: pointer;
+        }
+    }
+    &-progress-bar-edit-label,
+    &-progress-bar-checkout-label {
+        display: inline-flex;
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    &-progress-bar-edit::after {
+        content: '';
+        position: absolute;
+        right: 50%;
+        width: 1.5em;
+        padding-top: 1.5em;
+        z-index: 1;
+        transform: rotate(45deg);
+        border-bottom: 0;
+        border-left: 0;
+        box-shadow: 7px -7px 0 -3px white;
+    }
+
+    &-progress-bar-checkout {
+
+    }
+}
+
+.bakery__checkout-container-shopping-cart {
+    .bakery__checkout-container-shopping-cart-table {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkout-edit-btn,
+    .checkout-remove-btn {
+
+    }
 }
 
 .bakery__checkout-number {

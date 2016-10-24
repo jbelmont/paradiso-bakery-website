@@ -11,7 +11,8 @@ class BakeryCheckoutArea extends Component {
  constructor(props) {
     super(props);
     this.state = {
-        cartItems: []
+        cartItems: [],
+        rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right'
     };
   }
 
@@ -24,10 +25,37 @@ class BakeryCheckoutArea extends Component {
   render() {
     const cart = store.getState() && store.getState()["checkoutCart"];
 
-    let cartContainer;
+    let cartContainer, progressBarContainer;
     if (cart && cart.length > 0) {
       cartContainer = (
-        cart.map(item => <div className="bakery__checkout-container-cart-item">{item["cartItems"]}</div>)
+        cart.map(item => <tr className="bakery__checkout-container-cart-item"><td>{item["cartItems"]}</td></tr>)
+      );
+
+      progressBarContainer = (
+        <div className="bakery__checkout-container-progress-bar">
+          <div className="bakery__checkout-container-progress-bar-edit">
+              <label className="bakery__checkout-container-progress-bar-edit-label">Edit</label>
+          </div>
+          <div className="bakery__checkout-container-progress-bar-checkout">
+            <label className="bakery__checkout-container-progress-bar-checkout-label">Checkout</label>
+          </div>
+          <div className="bakery__checkout-container-shopping-cart">
+            <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartContainer}
+              </tbody>
+            </table>
+            <button className="checkout-edit-btn">Edit</button>
+            <button className="checkout-remove-btn">Remove</button>
+          </div>
+        </div>
       );
     } else {
       cartContainer = (
@@ -62,7 +90,7 @@ class BakeryCheckoutArea extends Component {
         </div>
         </header>
         <div className="bakery__checkout-container">
-          <div className="bakery__checkout-container-progress-bar"></div>
+          {progressBarContainer}
           {cartContainer}
         </div>
       </div>
