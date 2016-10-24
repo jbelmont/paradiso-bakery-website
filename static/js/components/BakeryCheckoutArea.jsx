@@ -14,6 +14,7 @@ class BakeryCheckoutArea extends Component {
         cartItems: [],
         rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right'
     };
+    this._makePurchase = this._makePurchase.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,10 +23,56 @@ class BakeryCheckoutArea extends Component {
     });
   }
 
+  _makePurchase() {
+    return new Promise((resolve, reject) => {
+      const request = new XMLHttpRequest();
+      request.open('POST', '/api/v1/payments/createToken', true);
+
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          const data = JSON.parse(this.response);
+          resolve(data);
+        } else {
+          console.log('Some kind of error occurred');
+          reject(new Error('error ocurred'));
+        }
+      };
+
+      request.onerror = function() {
+        console.error('Something went wrong with the transaction');
+      };
+
+      request.send();
+    })
+    .then(token => {
+      // const request = new XMLHttpRequest();
+      // request.open('POST', '/api/v1/payments/receivePayment', true);
+
+      // request.onload = function() {
+      //   if (this.status >= 200 && this.status < 400) {
+      //     const data = JSON.parse(this.response);
+      //     resolve(data);
+      //   } else {
+      //     console.log('Some kind of error occurred');
+      //     reject(new Error('error ocurred'));
+      //   }
+      // };
+
+      // request.onerror = function() {
+      //   console.error('Something went wrong with the transaction');
+      // };
+
+      // request.send();
+      console.log(token);
+    })
+    .catch(err => console.error(err));
+    
+  }
+
   render() {
     const cart = store.getState() && store.getState()["checkoutCart"];
 
-    let cartContainer, progressBarContainer;
+    let cartContainer;
     if (cart && cart.length > 0) {
       cartContainer = (
         cart.map(item => <tr className="bakery__checkout-container-cart-item">
@@ -36,7 +83,7 @@ class BakeryCheckoutArea extends Component {
         )
       );
 
-      progressBarContainer = (
+      cartContainer = (
         <div className="bakery__checkout-container-progress-bar">
           <div className="bakery__checkout-container-progress-bar-edit">
               <label className="bakery__checkout-container-progress-bar-edit-label">Edit</label>
@@ -57,8 +104,9 @@ class BakeryCheckoutArea extends Component {
                 {cartContainer}
               </tbody>
             </table>
-            <button className="checkout-edit-btn">Edit</button>
-            <button className="checkout-remove-btn">Remove</button>
+            <div className="purchase-checkout-container">
+              <button className="pure-button checkout-purchase-btn" onClick={this._makePurchase}>Checkout</button>
+            </div>
           </div>
         </div>
       );
@@ -95,7 +143,7 @@ class BakeryCheckoutArea extends Component {
         </div>
         </header>
         <div className="bakery__checkout-container">
-          {progressBarContainer}
+          {cartContainer}
         </div>
       </div>
     );

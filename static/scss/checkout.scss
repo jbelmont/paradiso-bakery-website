@@ -84,9 +84,18 @@
             width: 100%;
         }
     }
-    .checkout-edit-btn,
-    .checkout-remove-btn {
+    .purchase-checkout-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        padding-top: 2.5%;
 
+        .checkout-purchase-btn {
+            width: 15%;
+            background-color: #009AFF;
+            color: white;
+            font-weight: 500;
+        }
     }
 }
 
