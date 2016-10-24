@@ -7,20 +7,36 @@
         <div class="reveal">
             <div class="slides">
                 <section>
-					<h3>Building Bakery Web App with Isomorphic JavaScript</h3>
+					<h3>Building A Bakery Web App with Isomorphic JavaScript</h3>
 					<p>JavaScript is awesome, just let me show you</p>
 				</section>
                 <section>
-					<h3>Don't Believe me yet.</h3>
-					<p>Let's us go on an adventure.</p>
+					<h3>FrontEnd Architecture: </h3>
+					<p>React.js</p>
+					<p>React Router</p>
+					<p>Redux (Dispatch actions to Redux Store)</p>
+					<p>Sass</p>
 				</section> 
                 <section>
-					<h3></h3>
-					<p></p>
+					<h3>BackEnd Architecture: </h3>
+					<p>Node.js</p>
+					<p>Express.js</p>
+					<p>RethinkDB</p>
 				</section>  
                 <section>
-					<h3></h3>
-					<p></p>
+					<h3>App Structure: </h3>
+					<pre><code data-trim class="javascript">
+					const port = normalizePort(process.env.PORT);
+					const IP_ADDRESS = process.env.IP_ADDRESS;
+
+					const options = {
+					key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
+					cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
+					};
+
+					app.set('port', port);
+					const server = https.createServer(options, app);
+					</code></pre>
 				</section>            
         </div>
         <script src="reveal.js"></script>
