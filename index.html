@@ -25,19 +25,17 @@
 				</section>  
                 <section>
 					<h3>App Structure: </h3>
-					<pre><code class="javascript">
-					function() {	
-						const port = normalizePort(process.env.PORT);
-						const IP_ADDRESS = process.env.IP_ADDRESS;
+					<pre><code class="javascript">	
+					const port = normalizePort(process.env.PORT);
+					const IP_ADDRESS = process.env.IP_ADDRESS;
 
-						const options = {
-						key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
-						cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
-						};
+					const options = {
+					key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
+					cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
+					};
 
-						app.set('port', port);
-						const server = https.createServer(options, app);
-					}
+					app.set('port', port);
+					const server = https.createServer(options, app);
 					</code></pre>
 				</section>            
         </div>
@@ -56,7 +54,12 @@
         			{ src: 'plugin/math/math.js', async: true }
 					// Zoom in and out with Alt+click
         			{ src: 'plugin/zoom-js/zoom.js', async: true },
-					
+					// Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+					// Interpret Markdown in <section> elements
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
 				]
 			});
 		</script>
