@@ -16,6 +16,10 @@ var filesToCopy = [
     dest: '.' 
   },
   {
+    src: './node_modules/reveal.js/lib/css/zenburn.css',
+    dest: '.' 
+  },
+  {
     src: './node_modules/reveal.js/css/theme/*.css',
     dest: './css' 
   },
@@ -25,7 +29,7 @@ var filesToCopy = [
   },
   {
     src: './node_modules/reveal.js/lib/font/league-gothic/*',
-    dest: '.' 
+    dest: './lib/font/league-gothic' 
   },
   {
     src: './node_modules/reveal.js/plugin/**/*',

@@ -1,7 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="reveal.css">
-        <link rel="stylesheet" href="lib/font/league-gothic/league-gothic.css">
+        <link rel="stylesheet" href="zenburn.css">
         <link rel="stylesheet" href="css/moon.css">
     </head>
     <body>
@@ -26,17 +26,17 @@
 				</section>  
                 <section>
 					<h3>App Structure: </h3>
-					<pre><code class="javascript">	
-					var port = normalizePort(process.env.PORT);
-					var IP_ADDRESS = process.env.IP_ADDRESS;
+					<pre><code data-trim class="javascript">	
+var port = normalizePort(process.env.PORT);
+var IP_ADDRESS = process.env.IP_ADDRESS;
 
-					var options = {
-						key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
-						cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
-					};
+var options = {
+	key: fs.readFileSync(path.join(__dirname, '../ca/key.pem')),
+	cert: fs.readFileSync(path.join(__dirname, '../ca/cert.pem'))
+};
 
-					app.set('port', port);
-					var server = https.createServer(options, app);
+app.set('port', port);
+var server = https.createServer(options, app);
 					</code></pre>
 				</section>            
         </div>
