@@ -6,6 +6,8 @@ import store from '../store/store';
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
 
+import {ajax} from '../utils/ajax.js';
+
 class BakeryCheckoutArea extends Component {
 
  constructor(props) {
@@ -24,49 +26,26 @@ class BakeryCheckoutArea extends Component {
   }
 
   _makePurchase() {
-    return new Promise((resolve, reject) => {
-      const request = new XMLHttpRequest();
-      request.open('POST', '/api/v1/payments/createToken', true);
-
-      request.onload = function() {
-        if (this.status >= 200 && this.status < 400) {
-          const data = JSON.parse(this.response);
-          resolve(data);
-        } else {
-          console.log('Some kind of error occurred');
-          reject(new Error('error ocurred'));
+    const createTokenPostRequest = {
+      type: 'POST',
+      route: '/api/v1/payments/createToken',
+      body: null
+    };
+    return ajax(createTokenPostRequest)
+    .then(token => {
+      const {id} = token;
+      const createPaymentPostRequest = {
+        type: 'POST',
+        route: '/api/v1/payments/receivePayment',
+        body: {
+          stripeToken: id
         }
       };
-
-      request.onerror = function() {
-        console.error('Something went wrong with the transaction');
-      };
-
-      request.send();
+      return ajax(createPaymentPostRequest)
+      .then(paymentCharge => console.log(paymentCharge))
+      .catch(err => console.log(err));
     })
-    .then(token => {
-      // const request = new XMLHttpRequest();
-      // request.open('POST', '/api/v1/payments/receivePayment', true);
-
-      // request.onload = function() {
-      //   if (this.status >= 200 && this.status < 400) {
-      //     const data = JSON.parse(this.response);
-      //     resolve(data);
-      //   } else {
-      //     console.log('Some kind of error occurred');
-      //     reject(new Error('error ocurred'));
-      //   }
-      // };
-
-      // request.onerror = function() {
-      //   console.error('Something went wrong with the transaction');
-      // };
-
-      // request.send();
-      console.log(token);
-    })
-    .catch(err => console.error(err));
-    
+    .catch(err => console.log(err));
   }
 
   render() {
