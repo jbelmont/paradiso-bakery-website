@@ -8,6 +8,8 @@ import UserProfile from './UserProfile';
 
 import {ajax} from '../utils/ajax.js';
 
+import * as constants from '../constants/constants.js';
+
 class BakeryCheckoutArea extends Component {
 
  constructor(props) {
@@ -65,6 +67,19 @@ class BakeryCheckoutArea extends Component {
   render() {
     const cart = store.getState() && store.getState()["checkoutCart"];
 
+    const {
+      HOME,
+      PARADISO_NAME,
+      MENU,
+      CONTACT,
+      ITEM,
+      QUANTITY,
+      PRICE,
+      CHECKOUT,
+      EMPTY_SHOPPING_CART,
+      EDIT
+    } = constants;
+
     let cartContainer;
     if (cart && cart.length > 0) {
       cartContainer = (
@@ -79,19 +94,19 @@ class BakeryCheckoutArea extends Component {
       cartContainer = (
         <div className="bakery__checkout-container-progress-bar">
           <div className="bakery__checkout-container-progress-bar-edit">
-              <label className="bakery__checkout-container-progress-bar-edit-label">Edit</label>
+              <label className="bakery__checkout-container-progress-bar-edit-label">{EDIT}</label>
           </div>
           <div className="bakery__checkout-container-progress-bar-checkout">
-            <label className="bakery__checkout-container-progress-bar-checkout-label">Checkout</label>
+            <label className="bakery__checkout-container-progress-bar-checkout-label">{CHECKOUT}</label>
           </div>
           <div className="bakery__checkout-container-shopping-cart">
             <form name="checkoutFormData">
               <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
                 <thead>
                   <tr className="bakery__checkout-container-shopping-cart-header-row">
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <th>{ITEM}</th>
+                    <th>{QUANTITY}</th>
+                    <th>{PRICE}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -100,14 +115,14 @@ class BakeryCheckoutArea extends Component {
               </table>
             </form>
             <div className="purchase-checkout-container">
-              <button className="pure-button checkout-purchase-btn" onClick={this._makePurchase}>Checkout</button>
+              <button className="pure-button checkout-purchase-btn" onClick={this._makePurchase}>{CHECKOUT}</button>
             </div>
           </div>
         </div>
       );
     } else {
       cartContainer = (
-        <h4 className="bakery__checkout-container-empty-cart">You have no items in your shopping cart!</h4>
+        <h4 className="bakery__checkout-container-empty-cart">{EMPTY_SHOPPING_CART}</h4>
       );
     }
 
@@ -115,7 +130,7 @@ class BakeryCheckoutArea extends Component {
       <div className="bakery__container">
         <header className="bakery__header-container">
         <div className="bakery__header-container-label">
-          <p>Jean Pauls Paradiso</p>
+          <p>PARADISO_NAME</p>
           <div className="bakery__header-container-action">
             <BakeryCheckout to="/checkout" cartLength={cart && cart.length} />
             <UserProfile />
@@ -126,13 +141,13 @@ class BakeryCheckoutArea extends Component {
             <ul className="bakery__header-container-tabs-list">
               <IndexLink className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
-                to="/">Home</IndexLink>
+                to="/">{HOME}</IndexLink>
               <Link className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
-                to="/menu">Menu</Link>
+                to="/menu">{MENU}</Link>
               <Link className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
-                to="/contact">Contact</Link>
+                to="/contact">{CONTACT}</Link>
             </ul>
           </nav>
         </div>

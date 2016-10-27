@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 import MenuSideBarButton from './MenuSideBarButton.jsx';
 
+import * as constants from '../constants/constants.js';
+
 class MenuSideBar extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      menuitems: ['Breakfast', 'Breakfast Ala Carte','Boxed Lunches', 'Entree Salads', 'Gourmet Trays', 'Main Selections', 'Pizzas']
+      menuitems: constants.RECIPE_SECTIONS
     };
   }
 

@@ -5,6 +5,7 @@ import store from '../store/store';
 
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
+import * as constants from '../constants/constants.js';
 
 class Bakery extends Component {
 
@@ -20,6 +21,7 @@ class Bakery extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       breakfastAlaCarte: this.props.breakfastAlaCarte,
       breakfast: this.props.breakfast,
@@ -45,13 +47,20 @@ class Bakery extends Component {
     });
 
     const cartLength = store.getState()["checkoutCart"] 
-      && store.getState()["checkoutCart"].length
+      && store.getState()["checkoutCart"].length;
+
+    const {
+      HOME,
+      MENU,
+      CONTACT,
+      PARADISO_NAME
+    } = constants;
 
     return (
       <div className="bakery__container">
         <header className="bakery__header-container">
         <div className="bakery__header-container-label">
-          <p>Jean Pauls Paradiso</p>
+          <p>{PARADISO_NAME}</p>
           <div className="bakery__header-container-action">
             <BakeryCheckout to="/checkout" cartLength={cartLength || this.state.cartLength} />
             <UserProfile />
@@ -62,13 +71,13 @@ class Bakery extends Component {
             <ul className="bakery__header-container-tabs-list">
               <IndexLink className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
-                to="/">Home</IndexLink>
+                to="/">{HOME}</IndexLink>
               <Link className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
-                to="/menu">Menu</Link>
+                to="/menu">{MENU}</Link>
               <Link className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
-                to="/contact">Contact</Link>
+                to="/contact">{CONTACT}</Link>
             </ul>
           </nav>
         </div>
