@@ -5,6 +5,7 @@ import store from '../store/store';
 
 let cart = [];
 let cartLength = 0;
+let quantity = 3;
 class MenuItems extends Component {
 
   static propTypes = {
@@ -21,7 +22,7 @@ class MenuItems extends Component {
       ingreds: this.props.ingreds,
       addToCartSvgPath: this.props.addToCartSvgPath,
       price: this.props.price,
-      quantity: 1,
+      quantity: quantity++,
       cartItems: []
     };
     this._addToCart = this._addToCart.bind(this);

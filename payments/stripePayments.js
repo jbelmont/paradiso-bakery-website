@@ -19,12 +19,15 @@ router.post('/createToken', (req, res, next) => {
 });
 
 router.post('/receivePayment', (req, res, next) => {
-    const {stripeToken} = req.body;
+    const {
+        stripeToken, 
+        amount
+    } = req.body;
     return stripe.charges.create({
-        amount: 1000, // Amount in cents
+        amount,
         currency: "usd",
         source: stripeToken,
-        description: "Example charge"
+        description: "Menu Item Charge"
     })
     .then(charge => res.send(charge))
     .catch(err => winston.log('error', 'Error Creating Charge for stripe', {err}));

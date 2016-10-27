@@ -1,0 +1,2 @@
+
+export const RETRIEVE_MENU_ITEMS = 'RETRIEVE_MENU_ITEMS';

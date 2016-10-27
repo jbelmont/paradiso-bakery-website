@@ -17,6 +17,7 @@ class BakeryCheckoutArea extends Component {
         rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right'
     };
     this._makePurchase = this._makePurchase.bind(this);
+    this._generatePaymentPostRequest = this._generatePaymentPostRequest.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,21 +32,34 @@ class BakeryCheckoutArea extends Component {
       route: '/api/v1/payments/createToken',
       body: null
     };
+
     return ajax(createTokenPostRequest)
     .then(token => {
       const {id} = token;
-      const createPaymentPostRequest = {
-        type: 'POST',
-        route: '/api/v1/payments/receivePayment',
-        body: {
-          stripeToken: id
-        }
-      };
+      const createPaymentPostRequest = this._generatePaymentPostRequest(id);
       return ajax(createPaymentPostRequest)
       .then(paymentCharge => console.log(paymentCharge))
       .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
+  }
+
+  _generatePaymentPostRequest(id) {
+    const quantity = Array.from(document.getElementsByClassName('checkout-quantity-row'))
+        .map(quantity =>  Number(quantity.dataset["quantity"]));
+      const price = Array.from(document.getElementsByClassName('checkout-price-row'))
+        .map(quantity => Number(quantity.dataset["price"]));
+      const amount = price
+        .map((price, index, arr) => price * quantity[index])
+        .reduce((prev, curr) => prev + curr, 0) * 100;
+      return {
+        type: 'POST',
+        route: '/api/v1/payments/receivePayment',
+        body: {
+          stripeToken: id,
+          amount
+        }
+      };
   }
 
   render() {
@@ -56,8 +70,8 @@ class BakeryCheckoutArea extends Component {
       cartContainer = (
         cart.map(item => <tr className="bakery__checkout-container-cart-item">
           <td>{item["cartItems"]}</td>
-          <td>{item["quantity"]}</td>
-          <td>{item["price"]}</td>
+          <td className="checkout-quantity-row" data-quantity={item["quantity"]}>{item["quantity"]}</td>
+          <td className="checkout-price-row" data-price={item["price"]}>{item["price"]}</td>
           </tr>
         )
       );
@@ -71,18 +85,20 @@ class BakeryCheckoutArea extends Component {
             <label className="bakery__checkout-container-progress-bar-checkout-label">Checkout</label>
           </div>
           <div className="bakery__checkout-container-shopping-cart">
-            <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
-              <thead>
-                <tr className="bakery__checkout-container-shopping-cart-header-row">
-                  <th>Item</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cartContainer}
-              </tbody>
-            </table>
+            <form name="checkoutFormData">
+              <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
+                <thead>
+                  <tr className="bakery__checkout-container-shopping-cart-header-row">
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartContainer}
+                </tbody>
+              </table>
+            </form>
             <div className="purchase-checkout-container">
               <button className="pure-button checkout-purchase-btn" onClick={this._makePurchase}>Checkout</button>
             </div>
