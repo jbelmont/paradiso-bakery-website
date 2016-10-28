@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
+import {browserHistory} from 'react-router';
 
 import store from '../store/store';
-import {removeFromCart} from '../actions/index';
+import {removeFromCart, purchaseAmount} from '../actions/index';
 
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
@@ -21,9 +22,9 @@ class BakeryCheckoutArea extends Component {
         trashBinPath: './build/symbol-defs.svg#icon-bin',
         cart: store.getState() && store.getState()["checkoutCart"]
     };
-    this._makePurchase = this._makePurchase.bind(this);
-    this._generatePaymentPostRequest = this._generatePaymentPostRequest.bind(this);
+    this._totalPurchaseAmount = this._totalPurchaseAmount.bind(this);
     this._deletePurchase = this._deletePurchase.bind(this);
+    this._goToFinalCheckout = this._goToFinalCheckout.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,40 +45,21 @@ class BakeryCheckoutArea extends Component {
     });
   }
 
-  _makePurchase() {
-    const createTokenPostRequest = {
-      type: 'POST',
-      route: '/api/v1/payments/createToken',
-      body: null
-    };
-
-    return ajax(createTokenPostRequest)
-    .then(token => {
-      const {id} = token;
-      const createPaymentPostRequest = this._generatePaymentPostRequest(id);
-      return ajax(createPaymentPostRequest)
-      .then(paymentCharge => console.log(paymentCharge))
-      .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
+  _goToFinalCheckout() {
+    const amount = this._totalPurchaseAmount();
+    store.dispatch(purchaseAmount({ amount }));
+    browserHistory.push("/purchase");
   }
 
-  _generatePaymentPostRequest(id) {
+  _totalPurchaseAmount() {
     const quantity = Array.from(document.getElementsByClassName('checkout-quantity-row'))
         .map(quantity =>  Number(quantity.dataset["quantity"]));
-      const price = Array.from(document.getElementsByClassName('checkout-price-row'))
-        .map(quantity => Number(quantity.dataset["price"]));
-      const amount = price
-        .map((price, index, arr) => price * quantity[index])
-        .reduce((prev, curr) => prev + curr, 0) * 100;
-      return {
-        type: 'POST',
-        route: '/api/v1/payments/receivePayment',
-        body: {
-          stripeToken: id,
-          amount
-        }
-      };
+    const price = Array.from(document.getElementsByClassName('checkout-price-row'))
+      .map(quantity => Number(quantity.dataset["price"]));
+    const amount = price
+      .map((price, index, arr) => price * quantity[index])
+      .reduce((prev, curr) => prev + curr, 0) * 100;
+    return amount;
   }
 
   render() {
@@ -145,7 +127,7 @@ class BakeryCheckoutArea extends Component {
               </table>
             </form>
             <div className="purchase-checkout-container">
-              <button className="pure-button checkout-continue-btn" onClick={this._makePurchase}>{CONTINUE}</button>
+              <button className="pure-button checkout-continue-btn" onClick={this._goToFinalCheckout}>{CONTINUE}</button>
             </div>
           </div>
         </div>

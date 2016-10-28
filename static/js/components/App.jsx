@@ -8,6 +8,7 @@ import BakeryHome from './BakeryHome.jsx';
 import Menu from './Menu.jsx';
 import Contact from './Contact.jsx';
 import BakeryCheckoutArea from './BakeryCheckoutArea.jsx';
+import Purchase from './BakeryCheckoutPurchase.jsx';
 
 import store, { history } from '../store/store';
 
@@ -20,6 +21,7 @@ const router = (
         <Route path="/contact" component={Contact}></Route>
       </Route>
       <Route path="/checkout" component={BakeryCheckoutArea}></Route>
+      <Route path="/purchase" component={Purchase}></Route>
     </Router>
   </Provider>
 );

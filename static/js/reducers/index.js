@@ -9,6 +9,7 @@ import gourmetTraysAndApps from './gourmetTraysAndApps';
 import main from './main';
 import pizzas from './pizzas';
 import checkoutCart from './checkoutCart';
+import purchaseAmount from './purchaseAmount';
 
 export const rootReducer = combineReducers({ 
     breakfast, 
@@ -18,7 +19,8 @@ export const rootReducer = combineReducers({
     gourmetTraysAndApps, 
     main,
     pizzas, 
-    checkoutCart, 
+    checkoutCart,
+    purchaseAmount,
     routing: routerReducer 
 });
 

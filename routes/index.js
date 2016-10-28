@@ -39,9 +39,15 @@ db.dbActions()
       res.render('index', data);
     });
 
+    /* GET Checkout page. */
     router.get('/checkout', function(req, res, next) {
       res.render('index', data);
-    })
+    });
+
+    /* GET Purchase page. */
+    router.get('/purchase', function(req, res, next) {
+      res.render('index', data);
+    });
   });
 
 module.exports = router;
