@@ -7,7 +7,7 @@ class MenuItems extends Component {
   static propTypes = {
     menuItems: React.PropTypes.array,
     typeOfMenuItem: React.PropTypes.string,
-    addToCartSvgPath: React.PropTypes.string
+    addToCartSvgPath: React.PropTypes.string,
   };
 
   constructor(props) {
@@ -15,7 +15,7 @@ class MenuItems extends Component {
     this.state = {
       menuItems: this.props.menuItems,
       menuType: this.props.typeOfMenuItem,
-      addToCartSvgPath: this.props.addToCartSvgPath
+      addToCartSvgPath: this.props.addToCartSvgPath,
     };
 
     this._deCamelifyRecipeName = this._deCamelifyRecipeName.bind(this);

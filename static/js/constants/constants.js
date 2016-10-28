@@ -12,9 +12,11 @@ export const PRICE = 'Price';
 export const CHECKOUT = 'Checkout';
 export const EMPTY_SHOPPING_CART = 'You have no items in your shopping cart!';
 export const EDIT = 'Edit';
+export const CART = 'Cart';
 
 // Image alt text
 export const PASTRY_CHEF = 'Paradiso Pastry Chef';
 
 // Text Data
 export const RECIPE_SECTIONS = ['Breakfast', 'Breakfast Ala Carte','Boxed Lunches', 'Entree Salads', 'Gourmet Trays', 'Main Selections', 'Pizzas'];
+export const RECIPE_QUANTITY = [1,2,3,4,5];

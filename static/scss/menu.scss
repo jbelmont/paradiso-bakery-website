@@ -71,6 +71,27 @@
   }
 }
 
+.menu_items__container-recipe-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_item__container-recipe-add-to-quantity {
+  display: flex;
+  margin-right: 5%;
+
+  &-label {
+    display: flex;
+    margin-right: 8%;
+    align-items: center;
+  }
+
+  select {
+    width: 3em;
+  }
+}
+
 .menu_item__container-recipe-add-to-cart {
   display: flex;
   justify-content: center;
