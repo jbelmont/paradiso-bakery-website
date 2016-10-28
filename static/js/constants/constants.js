@@ -12,7 +12,7 @@ export const PRICE = 'Price';
 export const CHECKOUT = 'Checkout';
 export const EMPTY_SHOPPING_CART = 'You have no items in your shopping cart!';
 export const EDIT = 'Edit';
-export const CART = 'Cart';
+export const CART = 'Add to Cart';
 
 // Image alt text
 export const PASTRY_CHEF = 'Paradiso Pastry Chef';

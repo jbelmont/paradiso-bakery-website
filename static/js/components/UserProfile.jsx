@@ -5,7 +5,7 @@ class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: "./build/symbol-defs.svg#icon-user"
+      userProfile: "./build/symbol-defs.svg#icon-user3"
     }
   }
 

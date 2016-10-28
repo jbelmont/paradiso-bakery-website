@@ -16,16 +16,22 @@ class BakeryCheckoutArea extends Component {
     super(props);
     this.state = {
         cartItems: [],
-        rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right'
+        rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right',
+        cart: store.getState() && store.getState()["checkoutCart"]
     };
     this._makePurchase = this._makePurchase.bind(this);
     this._generatePaymentPostRequest = this._generatePaymentPostRequest.bind(this);
+    this._deletePurchase = this._deletePurchase.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       cartItems: nextProps.cartItems
     });
+  }
+
+  _deletePurchase() {
+    
   }
 
   _makePurchase() {
@@ -65,8 +71,9 @@ class BakeryCheckoutArea extends Component {
   }
 
   render() {
-    const cart = store.getState() && store.getState()["checkoutCart"];
 
+    const {cart} = this.state;
+    
     const {
       HOME,
       PARADISO_NAME,
@@ -104,9 +111,17 @@ class BakeryCheckoutArea extends Component {
               <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
                 <thead>
                   <tr className="bakery__checkout-container-shopping-cart-header-row">
+                    <th>
+                      <svg className="delete-item-checkout-icon" 
+                           xmlns="http://www.w3.org/2000/svg"
+                           onClick={this._deletePurchase}>
+                        <use xlinkHref={addToCartSvgPath}></use>
+                      </svg>
+                    </th>
                     <th>{ITEM}</th>
                     <th>{QUANTITY}</th>
                     <th>{PRICE}</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>

@@ -114,7 +114,7 @@ class MenuItems extends Component {
                   xmlns="http://www.w3.org/2000/svg">
                     <use xlinkHref={addToCartSvgPath}></use>
                 </svg>
-                <span className="menu_item-checkout-text">Cart</span>
+                <span className="menu_item-checkout-text">{CART}</span>
               </button>
             </span>
           </div>
