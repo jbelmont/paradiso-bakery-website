@@ -19,23 +19,17 @@ class BakeryCheckoutArea extends Component {
         cartItems: [],
         rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right',
         trashBinPath: './build/symbol-defs.svg#icon-bin',
-        pencilSvgPath: './build/symbol-defs.svg#icon-pencil',
         cart: store.getState() && store.getState()["checkoutCart"]
     };
     this._makePurchase = this._makePurchase.bind(this);
     this._generatePaymentPostRequest = this._generatePaymentPostRequest.bind(this);
     this._deletePurchase = this._deletePurchase.bind(this);
-    this._editPurchase = this._editPurchase.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       cartItems: nextProps.cartItems
     });
-  }
-
-  _editPurchase() {
-
   }
 
   _deletePurchase(evt) {
@@ -104,20 +98,14 @@ class BakeryCheckoutArea extends Component {
       PRICE,
       CHECKOUT,
       EMPTY_SHOPPING_CART,
-      EDIT
+      EDIT,
+      CONTINUE
     } = constants;
 
     let cartContainer;
     if (cart && cart.length > 0) {
       cartContainer = (
         cart.map(item => <tr className="bakery__checkout-container-cart-item">
-          <td className="edit-item-checkout">
-            <svg className="edit-item-checkout-icon" 
-                xmlns="http://www.w3.org/2000/svg"
-                onClick={this._editPurchase}>
-            <use xlinkHref={pencilSvgPath}></use>
-            </svg>
-          </td>
           <td>{item["cartItems"]}</td>
           <td className="checkout-quantity-row" data-quantity={item["quantity"]}>{item["quantity"]}</td>
           <td className="checkout-price-row" data-price={item["price"]}>{item["price"]}</td>
@@ -157,7 +145,7 @@ class BakeryCheckoutArea extends Component {
               </table>
             </form>
             <div className="purchase-checkout-container">
-              <button className="pure-button checkout-purchase-btn" onClick={this._makePurchase}>{CHECKOUT}</button>
+              <button className="pure-button checkout-continue-btn" onClick={this._makePurchase}>{CONTINUE}</button>
             </div>
           </div>
         </div>

@@ -22,6 +22,7 @@ class MenuItems extends Component {
       recipeName: this.props.recipeName,
       ingreds: this.props.ingreds,
       addToCartSvgPath: this.props.addToCartSvgPath,
+      cart: store.getState() && store.getState()["checkoutCart"],
       price: this.props.price,
       quantity: 1,
       cartItems: []
@@ -46,11 +47,11 @@ class MenuItems extends Component {
   _addToCart(evt) {
     const item = evt.currentTarget.dataset["recipeName"];
     const price = evt.currentTarget.dataset["price"];
+    const {cart} = this.state;
     const hasCartBeenAdded = cart.some(cartItem => {
-      return cartItem === item;
+      return cartItem["cartItems"] === item;
     });
     if (!hasCartBeenAdded) {
-      cart.push(item);
       cartLength++;
       store.dispatch(addToCart({ 
         item,
@@ -58,6 +59,9 @@ class MenuItems extends Component {
         price,
         quantity: this.state.quantity
       }));
+      this.setState({
+        cart: store.getState() && store.getState()["checkoutCart"]
+      });
     }
   }
 

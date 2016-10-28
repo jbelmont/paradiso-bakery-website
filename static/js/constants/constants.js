@@ -12,6 +12,7 @@ export const ITEM = 'Item';
 export const QUANTITY = 'Quantity';
 export const PRICE = 'Price';
 export const CHECKOUT = 'Checkout';
+export const CONTINUE = 'Continue';
 export const EMPTY_SHOPPING_CART = 'You have no items in your shopping cart!';
 export const EDIT = 'Edit';
 export const CART = 'Add to Cart';

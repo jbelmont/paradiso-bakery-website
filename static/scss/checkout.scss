@@ -72,7 +72,7 @@
     }
 
     &-header-row th:first-child {
-        width: 50%;
+        width: 43%;
     }
 
     &-header-row th:nth-child(3) {
@@ -94,7 +94,7 @@
         width: 100%;
         padding-top: 2.5%;
 
-        .checkout-purchase-btn {
+        .checkout-continue-btn {
             width: 15%;
             background-color: #009AFF;
             color: white;
@@ -105,11 +105,18 @@
 
 .bakery__checkout-number {
     position: relative;
-    top: 2.5%;
-    left: 1%;
-    color: whitesmoke;
+    left: 0.75%;
+    background-color: #e23138;
+    color: white;
+    border-radius: 50%;
     font-size: 0.8rem;
-    width: 0.5rem;
+    width: 1rem;
+    height: 1.15rem;
+    font-weight: 600;
+    line-height: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 // edit-item-checkout-icon
 .delete-item-checkout,
