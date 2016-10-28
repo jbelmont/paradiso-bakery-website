@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
 
 import store from '../store/store';
+import {removeFromCart} from '../actions/index';
 
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
@@ -37,8 +38,16 @@ class BakeryCheckoutArea extends Component {
 
   }
 
-  _deletePurchase() {
-    
+  _deletePurchase(evt) {
+    const {cart} = this.state;
+    const itemDescription = evt.currentTarget.attributes[2].value;
+    const deleteItemIndex = cart.findIndex(elem => elem["cartItems"] === itemDescription);
+    store.dispatch(removeFromCart({ 
+      index: deleteItemIndex 
+    }));
+    this.setState({
+      cart: store.getState() && store.getState()["checkoutCart"]
+    });
   }
 
   _makePurchase() {
@@ -115,6 +124,7 @@ class BakeryCheckoutArea extends Component {
           <td className="delete-item-checkout">
             <svg className="delete-item-checkout-icon" 
                   xmlns="http://www.w3.org/2000/svg"
+                  data-item-description={item["cartItems"]}
                   onClick={this._deletePurchase}>
               <use xlinkHref={trashBinPath}></use>
             </svg>

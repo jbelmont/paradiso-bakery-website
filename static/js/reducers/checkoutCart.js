@@ -18,6 +18,12 @@ function checkoutCart(state = [], action) {
                     cartItems: item
                 }
             ];
+        case 'REMOVE_FROM_CART':
+            const {index} = action;
+            return [
+                ...state.slice(0 , index),
+                ...state.slice(index + 1)
+            ];
         default:
             return state;
     }

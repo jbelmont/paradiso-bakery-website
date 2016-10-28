@@ -1,5 +1,7 @@
 // Redux Action Keys
 export const RETRIEVE_MENU_ITEMS = 'RETRIEVE_MENU_ITEMS';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 // Component Text Values
 export const HOME = 'HOME';
