@@ -160,7 +160,7 @@ class BakeryCheckoutArea extends Component {
       <div className="bakery__container">
         <header className="bakery__header-container">
         <div className="bakery__header-container-label">
-          <p>PARADISO_NAME</p>
+          <p>{PARADISO_NAME}</p>
           <div className="bakery__header-container-action">
             <BakeryCheckout to="/checkout" cartLength={cart && cart.length} />
             <UserProfile />
