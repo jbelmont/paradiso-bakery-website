@@ -60,10 +60,6 @@
         border-left: 0;
         box-shadow: 7px -7px 0 -3px white;
     }
-
-    &-progress-bar-checkout {
-
-    }
 }
 
 .bakery__checkout-container-shopping-cart {
@@ -73,6 +69,14 @@
         width: calc(100% / 3);
         display: flex;
         justify-content: center;
+    }
+
+    &-header-row th:first-child {
+        width: 50%;
+    }
+
+    &-header-row th:nth-child(3) {
+        width: 52%;
     }
 
     .bakery__checkout-container-shopping-cart-table {
@@ -106,4 +110,14 @@
     color: whitesmoke;
     font-size: 0.8rem;
     width: 0.5rem;
+}
+// edit-item-checkout-icon
+.delete-item-checkout,
+.edit-item-checkout {
+    width: 2% !important;
+    &-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        cursor: pointer;
+    }
 }

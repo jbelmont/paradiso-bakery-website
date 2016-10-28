@@ -17,17 +17,24 @@ class BakeryCheckoutArea extends Component {
     this.state = {
         cartItems: [],
         rightArrowSvgPath: './build/symbol-defs.svg#icon-arrow-right',
+        trashBinPath: './build/symbol-defs.svg#icon-bin',
+        pencilSvgPath: './build/symbol-defs.svg#icon-pencil',
         cart: store.getState() && store.getState()["checkoutCart"]
     };
     this._makePurchase = this._makePurchase.bind(this);
     this._generatePaymentPostRequest = this._generatePaymentPostRequest.bind(this);
     this._deletePurchase = this._deletePurchase.bind(this);
+    this._editPurchase = this._editPurchase.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       cartItems: nextProps.cartItems
     });
+  }
+
+  _editPurchase() {
+
   }
 
   _deletePurchase() {
@@ -72,7 +79,11 @@ class BakeryCheckoutArea extends Component {
 
   render() {
 
-    const {cart} = this.state;
+    const {
+      cart,
+      trashBinPath,
+      pencilSvgPath
+    } = this.state;
     
     const {
       HOME,
@@ -91,9 +102,23 @@ class BakeryCheckoutArea extends Component {
     if (cart && cart.length > 0) {
       cartContainer = (
         cart.map(item => <tr className="bakery__checkout-container-cart-item">
+          <td className="edit-item-checkout">
+            <svg className="edit-item-checkout-icon" 
+                xmlns="http://www.w3.org/2000/svg"
+                onClick={this._editPurchase}>
+            <use xlinkHref={pencilSvgPath}></use>
+            </svg>
+          </td>
           <td>{item["cartItems"]}</td>
           <td className="checkout-quantity-row" data-quantity={item["quantity"]}>{item["quantity"]}</td>
           <td className="checkout-price-row" data-price={item["price"]}>{item["price"]}</td>
+          <td className="delete-item-checkout">
+            <svg className="delete-item-checkout-icon" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  onClick={this._deletePurchase}>
+              <use xlinkHref={trashBinPath}></use>
+            </svg>
+          </td>
           </tr>
         )
       );
@@ -111,17 +136,9 @@ class BakeryCheckoutArea extends Component {
               <table className="pure-table pure-table-horizontal bakery__checkout-container-shopping-cart-table">
                 <thead>
                   <tr className="bakery__checkout-container-shopping-cart-header-row">
-                    <th>
-                      <svg className="delete-item-checkout-icon" 
-                           xmlns="http://www.w3.org/2000/svg"
-                           onClick={this._deletePurchase}>
-                        <use xlinkHref={addToCartSvgPath}></use>
-                      </svg>
-                    </th>
                     <th>{ITEM}</th>
                     <th>{QUANTITY}</th>
                     <th>{PRICE}</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
