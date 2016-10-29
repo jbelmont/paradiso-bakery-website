@@ -79,7 +79,11 @@ class BakeryCheckoutPurchase extends Component {
       PARADISO_NAME,
       MENU,
       CONTACT,
-      PURCHASE
+      PURCHASE,
+      CARD_NUMBER,
+      EXPIRATION,
+      CVC,
+      PRICE
     } = constants;
 
     const makePurchaseContainer = (
@@ -92,22 +96,22 @@ class BakeryCheckoutPurchase extends Component {
                 <span className="payment-errors"></span>
               </div>
               <div className="bakery__checkout-container-card-block">
-                <label>Card Number</label>
+                <label>{CARD_NUMBER}</label>
                 <input id="creditCardNumber" className="pure-input" type="text" />
               </div>
               <div className="bakery__checkout-container-expiry-block">
-                <label>Expiration (MM/YY)</label>
+                <label>{EXPIRATION}</label>
                 <input id="expiryMonth" className="" type="text" size="2" />
                 <span className="slash-separator"> / </span>
                 <input id="expiryYear" className="" type="text" size="2" />
               </div>
               <div className="bakery__checkout-container-cvc-block">
-                <label className="bakery__checkout-container-cvc-block-label">CVC</label>
+                <label className="bakery__checkout-container-cvc-block-label">{CVC}</label>
                 <input id="cvcNumber" type="text" size="4" />
               </div>
               <div className="bakery__checkout-container-amount-block">
-                <label className="">Price</label>
-                <input type="text" value={amount && `\$${amount}`} disabled />
+                <label className="">{PRICE}</label>
+                <input type="text" value={amount && `\$${amount / 100}`} disabled />
               </div>
               <div className="checkout-purchase-container">
                 <button className="pure-button pure-button-primary checkout-purchase-container-btn" 

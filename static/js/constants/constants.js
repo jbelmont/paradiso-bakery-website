@@ -18,6 +18,9 @@ export const CONTINUE = 'Continue';
 export const EMPTY_SHOPPING_CART = 'You have no items in your shopping cart!';
 export const EDIT = 'Edit';
 export const CART = 'Add to Cart';
+export const CARD_NUMBER = 'Card Number';
+export const EXPIRATION = 'Expiration (MM/YY)';
+export const CVC = 'CVC';
 
 // Image alt text
 export const PASTRY_CHEF = 'Paradiso Pastry Chef';
