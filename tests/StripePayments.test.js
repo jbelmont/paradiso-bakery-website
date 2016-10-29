@@ -17,6 +17,7 @@ let stripeCharge = {
 describe('Test Stripe Api calls', () => {
 
     it('should return a token when calling stripe api', (done) => {
+        console.log(card);
         stripe.tokens
             .create(card)
             .then(token => {

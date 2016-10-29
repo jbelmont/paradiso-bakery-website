@@ -1,0 +1,106 @@
+.bakery__checkout-container {
+
+    &-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        fieldset {
+            display: flex;
+            width: 50%;
+        }
+    }
+
+    &-expiry-block,
+    &-card-block,
+    &-cvc-block,
+    &-amount-block {
+        display: flex;
+        width: 100%;
+        padding-bottom: 2%;
+        
+        label {
+            padding-right: 2%;
+            width: 20%;
+        }
+
+        input {
+            text-align: center;
+        }
+    }
+
+    &-amount-block {
+        input {
+            text-align: left;
+        }
+    }
+
+    &-card-block {
+
+        label {
+            display: flex;
+            width: 20%;
+        }
+
+        input {
+            display: flex;
+            width: 80%;
+            text-align: left;
+        }
+    }
+
+    &-expiry-block {
+        padding-right: 0;
+        height: 2em;
+
+        label {
+            display: flex;
+            padding-right: 0;
+            width: 22%;
+        }
+
+        .slash-separator {
+            display: flex;
+            align-items: center;
+        }
+
+        &-cvc {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 5%;
+        }
+
+        input {
+            display: flex;
+            width: 25%;
+        }
+    }
+
+    &-cvc-block {
+        height: 2em;
+
+        label {
+            width: 20%;
+        }
+        input {
+            width: 30%;
+        }
+    }
+}
+
+.checkout-purchase-container {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+
+    &-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25rem;
+    }
+}

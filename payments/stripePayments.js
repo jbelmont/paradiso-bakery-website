@@ -6,16 +6,30 @@ const path = require('path');
 const winston = require('winston');
 
 const stripe = require("stripe")(process.env["STRIPE_API_KEY"]);
-const card = {
-    card: require(path.join(__dirname, '../tests/data/creditCard'))["creditCard"]
-};
 
 /* Create Stripe token to be used for paradiso payments. */
 router.post('/createToken', (req, res, next) => {
+    let creditCardNumber = req.body && req.body.creditCardNumber;
+    let exp_month = req.body && req.body.exp_month;
+    let exp_year = req.body && req.body.exp_year;
+    let cvc = req.body && req.body.cvc;
+    let number = req.body && req.body.creditCardNumber;
+    const creditCardInfo = {
+        card: {
+            exp_month: exp_month,
+            exp_year: exp_year,
+            cvc: cvc,
+            number: creditCardNumber
+        }
+    };
     return stripe.tokens
-        .create(card)
-        .then(token => res.json(token))
-        .catch(err => winston.log('error', 'Error Creating token for stripe', {err}));
+        .create(creditCardInfo)
+        .then(token => {
+            res.json(token);
+        })
+        .catch(err => {
+            console.log(err); 
+             winston.log('error', 'Error Creating token for stripe', {err}) });
 });
 
 router.post('/receivePayment', (req, res, next) => {

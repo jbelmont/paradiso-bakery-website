@@ -4,6 +4,7 @@ export function ajax({type, route, body}) {
       request.open(type, route, true);
       if (type === "POST" || type === "PUT" && body) {
           request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          request.setRequestHeader("Accept", "application/json");
       }
 
       request.onload = function() {
