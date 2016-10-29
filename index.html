@@ -15,21 +15,27 @@
 					<h5>A little bit about me.</h5>
 					<p>Jean-Marcel Belmont</p>
 					<p>Software Engineer at Interactive Intelligence</p>
-					</section>
-                <section>
+				</section>
+				<section data-background-iframe="http://giphy.com/embed/26FPy3QZQqGtDcrja">
+					<h2>JavaScript Ecosystem Appears like a Dumpster Fire</h2>
+				</section>
+				<section>
 					<h3>FrontEnd Architecture: </h3>
 					<p>React.js</p>
 					<p>React Router</p>
 					<p>Redux (Dispatch actions to Redux Store)</p>
 					<p>Sass</p>
 				</section> 
-                <section>
+				<section>
 					<h3>BackEnd Architecture: </h3>
 					<p>Node.js</p>
 					<p>Express.js</p>
 					<p>RethinkDB</p>
-				</section>  
-                <section>
+				</section>
+				<section data-background-iframe="http://giphy.com/embed/yuQdPRq60Xs0E">
+					<h4>This guy is breathing out insane chicken wing sauce</h4>
+				</section>
+        <section>
 					<p>Server starts at bin/www by setting port and grabbing self signed certificate before launching https server.</p>
 					<pre><code data-trim class="javascript">	
 /**
@@ -128,14 +134,11 @@ module.exports = {
 					</pre>
 				</section>   
 				<section>
-					<h5>Setup ES2015 with webpack babel and choose a build tool like gulp or use npm scripts.</h5>
 					<p>Webpack is a module bundler that is configurable and has a large plugin ecosystem.</p>
-					<p>Babel is a JavaScript Transpiler that has many plugins for newer javascript features and for libraries such as react.js</p>
+					<p>Babel is a JavaScript Transpiler that has many plugins for newer javascript features.</p>
 					<pre>
 						<code data-trim class="javascript">
-/* jshint browserify: true */
 const webpack = require('webpack');
-
 module.exports = {
   entry: {
     App: './static/js/components/App.jsx'
@@ -145,43 +148,20 @@ module.exports = {
     filename: '[name].js'
   },
   devtool: 'source-map',
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loader: 'babel',
-      query: {
-        presets:['es2015','react', 'stage-0']
-      }
-    },{
-      test: /\.scss$/,
-      loader: 'style!css!autoprefixer!sass?sourceMap'
-    }]
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-  externals: {
-    react: 'React'
-  },
+	...
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
-    new webpack.HotModuleReplacementPlugin()
-  ]
-};
-
-// .babelrc 
-{ 
-    "presets": ["es2015", "react", "stage-0"] 
-}
+    ...
 						</code>
 					</pre>
 				</section>
 				<section>
-					<p>Setup npm scripts that hook into gulp tasks or utilize npm scripts to do all of the features of gulp.</p>
+					<section>
+					<p>Use gulp tasks and intergrate them with npm scripts.</p>
 					<pre>
 						<code data-trim class="javascript">
 // gulpfile here							
@@ -196,19 +176,36 @@ gulp.task('start', () => {
 gulp.task('build', (cb) => {
   runSequence('copy:react:files', 'uglify:js', 'build:js', 'build:sass', 'build:vendor:sass',  cb);
 });
-
-// npm scripts
-"scripts": {
-    "clean:build": "rimraf ./static/build",
-    "lint:watch": "npm run lint -- --watch",
-    "lint": "esw static/js",
-    "prestart:dev": "npm run clean:build",
-    "start:dev": "gulp dev",
-    "build": "npm run clean:build && gulp build",
-    "test": "jest tests"
-  }
 						</code>
 					</pre>
+					</section>
+					<section>
+						<h4>NPM scripts is where you can handle compilation and other tasks.</h4>
+						<pre>
+							<code data-trim class="javascript">
+"scripts": {
+		"clean:build": "rimraf ./static/build",
+		"lint:watch": "npm run lint -- --watch",
+		"lint": "esw static/js",
+		"prestart:dev": "npm run clean:build",
+		"start:dev": "gulp dev",
+		"build": "npm run clean:build && gulp build",
+		"test": "jest tests"
+  }
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>babelrc is where you load up optional presets for babel compilation.</p>
+					<pre>
+						<code data-trim class="javascript">
+// .babelrc 
+{ 
+    "presets": ["es2015", "react", "stage-0"] 
+}
+					</code>
+					</pre>
+					</section>
 				</section>
 				<section>
 					<h5>Now for the FrontEnd Logic: </h5>
@@ -220,24 +217,27 @@ gulp.task('build', (cb) => {
 					<p>There is a some work to figuring how to connect react router, redux and react together.</p>
 				</section>
 				<section>
+					<section>
 					<h5>App Logic begins in App.jsx</h5>
 					<pre>
 						<code data-trim class="javascript">
 import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { Provider } from 'react-redux';
+...
 
 import Main from './Main.jsx';
 import BakeryHome from './BakeryHome.jsx';
 import Menu from './Menu.jsx';
-import Contact from './Contact.jsx';
-import BakeryCheckoutArea from './BakeryCheckoutArea.jsx';
+...
 
 import store, { history } from '../store/store';
-
-const router = (
-  <Provider store={store}>
+						</code>
+					</pre>
+					</section>
+					<section>
+						<h6>React Router Snippet </h6>
+						<pre>
+							<code>
+<Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Main}>
         <IndexRoute component={BakeryHome}></IndexRoute>
@@ -245,13 +245,12 @@ const router = (
         <Route path="/contact" component={Contact}></Route>
       </Route>
       <Route path="/checkout" component={BakeryCheckoutArea}></Route>
+      <Route path="/purchase" component={Purchase}></Route>
     </Router>
   </Provider>
-);
-
-render(router, document.getElementById('bakeryContainer'));		
-						</code>
-					</pre>
+							</code>
+						</pre>
+			</section>
 				</section>
 				<section>
 					<section>
@@ -290,6 +289,12 @@ export function addToCart({item, cartLength}) {
 }							
 						</code>
 					</pre>
+					</section>
+					<section data-background-iframe="http://giphy.com/embed/3o7TKSjRrfIPjeiVyM">
+						<h6>Mind Blown</h6>
+					</section>
+					<section>
+						
 					</section>
 					<section>
 						<p>Reducer updates state with Redux Store</p>
@@ -368,6 +373,9 @@ stripe.tokens
 						</pre>
 					</section>
 				</section>
+					<section>
+						<iframe data-src="http://giphy.com/embed/YUPXa9sGGnaE0" width="800" height="600"></iframe>
+					</section>
 				<section>
 					<h5>Demo Time!!!</h5>
 				</section>
