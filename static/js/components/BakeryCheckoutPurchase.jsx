@@ -3,6 +3,7 @@ import { Link, IndexLink } from 'react-router';
 import {browserHistory} from 'react-router';
 
 import store from '../store/store';
+import {emptyCart} from '../actions/index';
 
 import BakeryCheckout from './BakeryCheckout';
 import UserProfile from './UserProfile';
@@ -32,7 +33,11 @@ class BakeryCheckoutPurchase extends Component {
       const {id} = token;
       const createPaymentPostRequest = this._generatePaymentPostRequest(id);
       return ajax(createPaymentPostRequest)
-      .then(paymentCharge => console.log(paymentCharge))
+      .then(paymentCharge => {
+        console.log(paymentCharge);
+        store.dispatch(emptyCart({ empty: [] }));
+        browserHistory.push("/menu");
+      })
       .catch(err => console.log(err));
     })
     .catch(err => console.log(err));

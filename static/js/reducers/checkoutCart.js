@@ -24,6 +24,8 @@ function checkoutCart(state = [], action) {
                 ...state.slice(0 , index),
                 ...state.slice(index + 1)
             ];
+        case 'EMPTY_CART':
+            return [];
         default:
             return state;
     }

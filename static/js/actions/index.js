@@ -1,6 +1,7 @@
 import * as constants from '../constants/constants.js';
 const {
   REMOVE_FROM_CART,
+  EMPTY_CART,
   ADD_TO_CART,
   PURCHASE_AMOUNT
 } = constants;
@@ -12,6 +13,13 @@ export function addToCart({item, cartLength, price, quantity}) {
     cartLength,
     quantity,
     price
+  };
+}
+
+export function emptyCart({empty}) {
+  return {
+    type: EMPTY_CART,
+    empty
   };
 }
 
