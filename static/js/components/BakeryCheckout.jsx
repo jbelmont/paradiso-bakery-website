@@ -10,9 +10,9 @@ class BakeryCheckout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cartSvgPath: "./build/symbol-defs.svg#icon-cart",
+      cartSvgPath: './build/symbol-defs.svg#icon-cart',
       cartLength: this.props.cartLength
-    }
+    };
     this._clickCart = this._clickCart.bind(this);
   }
 
@@ -23,7 +23,7 @@ class BakeryCheckout extends Component {
   }
 
   _clickCart() {
-    browserHistory.push("/checkout");
+    browserHistory.push('/checkout');
   }
 
   render() {

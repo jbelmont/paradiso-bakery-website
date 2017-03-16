@@ -46,8 +46,8 @@ class Bakery extends Component {
       pizzas: this.state.pizzas
     });
 
-    const cartLength = store.getState()["checkoutCart"] 
-      && store.getState()["checkoutCart"].length;
+    const cartLength = store.getState()['checkoutCart']
+      && store.getState()['checkoutCart'].length;
 
     const {
       HOME,
@@ -78,6 +78,9 @@ class Bakery extends Component {
               <Link className='bakery__tabs'
                 activeClassName="bakery__navigation--bottom-border"
                 to="/contact">{CONTACT}</Link>
+              <Link className="bakery__tabs"
+                activeClassName="bakery__navigation--bottom-border"
+                to="/facebook">{FACEBOOK}</Link>
             </ul>
           </nav>
         </div>

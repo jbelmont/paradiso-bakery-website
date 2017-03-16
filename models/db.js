@@ -1,11 +1,9 @@
-"use strict";
+'use strict';
 
 const rethinkdb = require('rethinkdb');
 const winston = require('winston');
 
-const recipes = require('./recipes')["recipes"];
-
-let connection;
+const recipes = require('./recipes')['recipes'];
 
 const DB = {
   DATABASE_NAME: process.env.DATABASE_NAME || 'paradiso',
@@ -16,18 +14,18 @@ const DB = {
 };
 
 function connectToRethinkDBServer() {
-    return rethinkdb
+  return rethinkdb
         .connect({
-            host : DB.host,
-            port : DB.port,
-            db: DB.DATABASE_NAME
+          host : DB.host,
+          port : DB.port,
+          db: DB.DATABASE_NAME
         })
         .then(connect => connect)
         .catch((error) => {
-            winston.log('error', 'Database Connection Error', {
-                error
-            });
-            return error;
+          winston.log('error', 'Database Connection Error', {
+            error
+          });
+          return error;
         });
 }
 
@@ -41,7 +39,7 @@ function doesParadisoExist() {
 
 function createParadisoDB(databaseExists) {
   if (!databaseExists) {
-      return createDB()
+    return createDB()
         .then(value => value);
   }
 }
@@ -92,8 +90,8 @@ function getRecipes() {
         .toArray()
         .then(values => {
           return values;
-        })
-    }); 
+        });
+    });
 }
 
 function dbActions() {
@@ -128,7 +126,7 @@ function dbActions() {
               });
           }
         });
-      });
+    });
 }
 
 exports.dbActions = dbActions;

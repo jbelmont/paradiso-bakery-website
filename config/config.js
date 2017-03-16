@@ -1,3 +1,3 @@
 module.exports = {
-    loadEnvironmentVars: require('dotenv').config()
-}
+  loadEnvironmentVars: require('dotenv').config()
+};

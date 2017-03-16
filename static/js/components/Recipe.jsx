@@ -22,7 +22,7 @@ class MenuItems extends Component {
       recipeName: this.props.recipeName,
       ingreds: this.props.ingreds,
       addToCartSvgPath: this.props.addToCartSvgPath,
-      cart: store.getState() && store.getState()["checkoutCart"],
+      cart: store.getState() && store.getState()['checkoutCart'],
       price: this.props.price,
       quantity: 1,
       cartItems: []
@@ -45,11 +45,11 @@ class MenuItems extends Component {
   }
 
   _addToCart(evt) {
-    const item = evt.currentTarget.dataset["recipeName"];
-    const price = evt.currentTarget.dataset["price"];
+    const item = evt.currentTarget.dataset['recipeName'];
+    const price = evt.currentTarget.dataset['price'];
     const {cart} = this.state;
     const hasCartBeenAdded = cart.some(cartItem => {
-      return cartItem["cartItems"] === item;
+      return cartItem['cartItems'] === item;
     });
     if (!hasCartBeenAdded) {
       cartLength++;
@@ -60,7 +60,7 @@ class MenuItems extends Component {
         quantity: this.state.quantity
       }));
       this.setState({
-        cart: store.getState() && store.getState()["checkoutCart"]
+        cart: store.getState() && store.getState()['checkoutCart']
       });
     }
   }
@@ -95,13 +95,13 @@ class MenuItems extends Component {
       </span>
     );
 
-    if (recipeName !== "Title" 
-        && recipeName !== "Header Notice"
-        && recipeName !== "Notice"
-        && recipeName !== "Beverages"
-        && recipeName !== "Extra1"
-        && recipeName !== "Extra2"
-        && recipeName !== "Boxed Lunches") {
+    if (recipeName !== 'Title' 
+        && recipeName !== 'Header Notice'
+        && recipeName !== 'Notice'
+        && recipeName !== 'Beverages'
+        && recipeName !== 'Extra1'
+        && recipeName !== 'Extra2'
+        && recipeName !== 'Boxed Lunches') {
       recipeContainer = (
         <div>
           <span className="menu_items__container-recipe-name">{recipeName}</span>

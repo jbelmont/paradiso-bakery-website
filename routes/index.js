@@ -3,7 +3,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const winston = require('winston');
 
 /**
  * Setup Database Connection
@@ -20,32 +19,32 @@ db.dbActions()
     };
 
     /* GET home page. */
-    router.get('/', function(req, res, next) {
+    router.get('/', function(req, res) {
       res.render('index', data);
     });
 
     /* GET Menu page. */
-    router.get('/menu', function(req, res, next) {
+    router.get('/menu', function(req, res) {
       res.render('index', data);
     });
 
     /* GET Contact page. */
-    router.get('/contact', function(req, res, next) {
+    router.get('/contact', function(req, res) {
       res.render('index', data);
     });
 
     /* GET Orders page. */
-    router.get('/orders', function(req, res, next) {
+    router.get('/orders', function(req, res) {
       res.render('index', data);
     });
 
     /* GET Checkout page. */
-    router.get('/checkout', function(req, res, next) {
+    router.get('/checkout', function(req, res) {
       res.render('index', data);
     });
 
     /* GET Purchase page. */
-    router.get('/purchase', function(req, res, next) {
+    router.get('/purchase', function(req, res) {
       res.render('index', data);
     });
   });

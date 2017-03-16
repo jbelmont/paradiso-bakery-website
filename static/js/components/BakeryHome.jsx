@@ -6,7 +6,7 @@ class BakeryHome extends Component {
     super(props);
     this.state = {
       imagesPath: './build/paradiso.jpg'
-    }
+    };
   }
 
   render() {

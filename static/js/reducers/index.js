@@ -12,16 +12,16 @@ import checkoutCart from './checkoutCart';
 import purchaseAmount from './purchaseAmount';
 
 export const rootReducer = combineReducers({ 
-    breakfast, 
-    breakfastAlaCarte, 
-    boxedLunches, 
-    entreeSalads, 
-    gourmetTraysAndApps, 
-    main,
-    pizzas, 
-    checkoutCart,
-    purchaseAmount,
-    routing: routerReducer 
+  breakfast, 
+  breakfastAlaCarte, 
+  boxedLunches, 
+  entreeSalads, 
+  gourmetTraysAndApps, 
+  main,
+  pizzas, 
+  checkoutCart,
+  purchaseAmount,
+  routing: routerReducer 
 });
 
 export default rootReducer;

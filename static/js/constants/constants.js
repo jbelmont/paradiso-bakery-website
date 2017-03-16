@@ -10,6 +10,7 @@ export const HOME = 'HOME';
 export const PARADISO_NAME = 'Jean Pauls Paradiso';
 export const MENU = 'Menu';
 export const CONTACT = 'Contact';
+export const FACEBOOK = 'Facebook';
 export const ITEM = 'Item';
 export const QUANTITY = 'Quantity';
 export const PRICE = 'Price';

@@ -10,6 +10,7 @@ const gutil = require('gulp-util');
 const merge = require('merge-stream');
 const nodemon = require('gulp-nodemon');
 const livereload = require('gulp-livereload');
+const eslint = require('gulp-eslint');
 
 // Load Environment constiables
 require('dotenv').config();
@@ -28,12 +29,12 @@ const sassPaths = [
 
 const filesToCopy = [
   {
-		src: './node_modules/react/dist/react.min.js',
-		dest: './static/build'
-	},
+    src: './node_modules/react/dist/react.min.js',
+    dest: './static/build'
+  },
   {
     src: './node_modules/react-dom/dist/react-dom.min.js',
-		dest: './static/build'
+    dest: './static/build'
   },
   {
     src: './static/images/paradiso.jpg',
@@ -47,11 +48,11 @@ const filesToCopy = [
 ];
 
 gulp.task('copy:react:files', () => {
-	const streams = [];
-	filesToCopy.forEach(file => {
-		streams.push(gulp.src(file.src).pipe(gulp.dest(file.dest)));
-	});
-	return merge.apply(this, streams);
+  const streams = [];
+  filesToCopy.forEach(file => {
+    streams.push(gulp.src(file.src).pipe(gulp.dest(file.dest)));
+  });
+  return merge.apply(this, streams);
 });
 
 gulp.task('uglify:js', () => {
@@ -113,6 +114,19 @@ gulp.task('watch:sass', () => {
   gulp.watch('./static/scss/*.scss', ['build:sass']);
 });
 
+gulp.task('watch:lint', () => {
+  // Lint only files that change after this watch starts
+  const lintAndPrint = eslint();
+  // format results with each file, since this stream won't end.
+  lintAndPrint.pipe(eslint.formatEach());
+
+  return gulp.watch(['*.js', 'routes/*.js', 'models/*.js', 'config/*.js', 'bin/www', 'static/js/components/*.jsx', 'static/js/actions/index.js', 'static/js/constants/constants.js', 'static/js/data/data.js', 'static/js/reducers/*.js', 'static/js/store/*.js', 'static/js/utils/ajax.js', 'tests/*.js', 'tests/data/*.js'], event => {
+    if (event.type !== 'deleted') {
+      gulp.src(event.path).pipe(lintAndPrint, {end: false});
+    }
+  });
+});
+
 gulp.task('start', () => {
   nodemon({
     script: './bin/www',
@@ -127,5 +141,5 @@ gulp.task('build', (cb) => {
 
 gulp.task('dev', (cb) => {
   livereload.listen();
-  runSequence('copy:react:files', 'uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass'], 'start', cb);
+  runSequence('copy:react:files', 'uglify:js', 'build:sass', 'build:vendor:sass', ['watch:js', 'watch:sass', 'watch:lint'], 'start', cb);
 });

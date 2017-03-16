@@ -14,10 +14,10 @@ import * as constants from '../constants/constants.js';
 
 class BakeryCheckoutPurchase extends Component {
 
- constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
-      amount: store.getState() && store.getState()["purchaseAmount"]["amount"]
+      amount: store.getState() && store.getState()['purchaseAmount']['amount']
     };
     this._makePurchase = this._makePurchase.bind(this);
     this._generateStripeToken = this._generateStripeToken.bind(this);
@@ -36,7 +36,7 @@ class BakeryCheckoutPurchase extends Component {
       .then(paymentCharge => {
         console.log(paymentCharge);
         store.dispatch(emptyCart({ empty: [] }));
-        browserHistory.push("/menu");
+        browserHistory.push('/menu');
       })
       .catch(err => console.log(err));
     })
@@ -57,7 +57,7 @@ class BakeryCheckoutPurchase extends Component {
         creditCardNumber,
         cvc: cvcNumber
       }
-    }
+    };
   }
 
   _generatePaymentPostRequest(id) {

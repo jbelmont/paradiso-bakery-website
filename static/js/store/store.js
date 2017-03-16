@@ -8,13 +8,13 @@ import rootReducer from '../reducers/index';
 import recipes from '../../api/menuItems';
 
 function getStateObject(recipes) {
-  const breakfastAlaCarte = recipes.filter((item) => item["breakfastAlaCarte"]);
-  const breakfast = recipes.filter((item) => item["breakfast"]);
-  const boxedLunches = recipes.filter((item) => item["boxedLunches"]);
-  const entreeSalads = recipes.filter((item) => item["entreeSalads"]);
-  const gourmetTraysAndApps = recipes.filter((item) => item["gourmetTraysAndApps"] && item["alaCarteApps"]);
-  const main = recipes.filter((item) => item["mainSelections"] && item["cincinattiFavorites"]);
-  const pizzas = recipes.filter((item) => item["pizzas"]);
+  const breakfastAlaCarte = recipes.filter((item) => item['breakfastAlaCarte']);
+  const breakfast = recipes.filter((item) => item['breakfast']);
+  const boxedLunches = recipes.filter((item) => item['boxedLunches']);
+  const entreeSalads = recipes.filter((item) => item['entreeSalads']);
+  const gourmetTraysAndApps = recipes.filter((item) => item['gourmetTraysAndApps'] && item['alaCarteApps']);
+  const main = recipes.filter((item) => item['mainSelections'] && item['cincinattiFavorites']);
+  const pizzas = recipes.filter((item) => item['pizzas']);
 
   return {
     breakfastAlaCarte,

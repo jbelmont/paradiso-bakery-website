@@ -10,11 +10,11 @@ class Contact extends Component {
         {addr: '6732 Clough Pike Cincinnati, OH 45244', class: 'contact__container-address'}, 
         {addr: 'info@jeanpaulsparadisocafe.com', class: 'contact__container-email'}
       ]
-    }
+    };
   }
   render() {
     const {addressInfo} = this.state;
-    const info = (addressInfo.map(info => <div className={info["class"]}>{info["addr"]}</div>))
+    const info = (addressInfo.map(info => <div className={info['class']}>{info['addr']}</div>));
     return (
       <div className="contact__container">
         {info}
